@@ -53,10 +53,10 @@ RM = /home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/remix/coding/cpp/serializer
+CMAKE_SOURCE_DIR = /home/remix/文档/GitHub/muse-serializer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/remix/coding/cpp/serializer/build
+CMAKE_BINARY_DIR = /home/remix/文档/GitHub/muse-serializer/build
 
 # Include any dependencies generated for this target.
 include src/CMakeFiles/serializer.dir/depend.make
@@ -70,32 +70,32 @@ include src/CMakeFiles/serializer.dir/progress.make
 include src/CMakeFiles/serializer.dir/flags.make
 
 src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o: src/CMakeFiles/serializer.dir/flags.make
-src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o: /home/remix/coding/cpp/serializer/src/serializer/binarySerializer.cpp
+src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o: /home/remix/文档/GitHub/muse-serializer/src/serializer/binarySerializer.cpp
 src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o: src/CMakeFiles/serializer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/remix/coding/cpp/serializer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o"
-	cd /home/remix/coding/cpp/serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o -MF CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o.d -o CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o -c /home/remix/coding/cpp/serializer/src/serializer/binarySerializer.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/remix/文档/GitHub/muse-serializer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o"
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o -MF CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o.d -o CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o -c /home/remix/文档/GitHub/muse-serializer/src/serializer/binarySerializer.cpp
 
 src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.i"
-	cd /home/remix/coding/cpp/serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/remix/coding/cpp/serializer/src/serializer/binarySerializer.cpp > CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.i
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/remix/文档/GitHub/muse-serializer/src/serializer/binarySerializer.cpp > CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.i
 
 src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.s"
-	cd /home/remix/coding/cpp/serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/remix/coding/cpp/serializer/src/serializer/binarySerializer.cpp -o CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.s
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/remix/文档/GitHub/muse-serializer/src/serializer/binarySerializer.cpp -o CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.s
 
 src/CMakeFiles/serializer.dir/serializer/util.cpp.o: src/CMakeFiles/serializer.dir/flags.make
-src/CMakeFiles/serializer.dir/serializer/util.cpp.o: /home/remix/coding/cpp/serializer/src/serializer/util.cpp
+src/CMakeFiles/serializer.dir/serializer/util.cpp.o: /home/remix/文档/GitHub/muse-serializer/src/serializer/util.cpp
 src/CMakeFiles/serializer.dir/serializer/util.cpp.o: src/CMakeFiles/serializer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/remix/coding/cpp/serializer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/serializer.dir/serializer/util.cpp.o"
-	cd /home/remix/coding/cpp/serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/serializer.dir/serializer/util.cpp.o -MF CMakeFiles/serializer.dir/serializer/util.cpp.o.d -o CMakeFiles/serializer.dir/serializer/util.cpp.o -c /home/remix/coding/cpp/serializer/src/serializer/util.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/remix/文档/GitHub/muse-serializer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/serializer.dir/serializer/util.cpp.o"
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/CMakeFiles/serializer.dir/serializer/util.cpp.o -MF CMakeFiles/serializer.dir/serializer/util.cpp.o.d -o CMakeFiles/serializer.dir/serializer/util.cpp.o -c /home/remix/文档/GitHub/muse-serializer/src/serializer/util.cpp
 
 src/CMakeFiles/serializer.dir/serializer/util.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/serializer.dir/serializer/util.cpp.i"
-	cd /home/remix/coding/cpp/serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/remix/coding/cpp/serializer/src/serializer/util.cpp > CMakeFiles/serializer.dir/serializer/util.cpp.i
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/remix/文档/GitHub/muse-serializer/src/serializer/util.cpp > CMakeFiles/serializer.dir/serializer/util.cpp.i
 
 src/CMakeFiles/serializer.dir/serializer/util.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/serializer.dir/serializer/util.cpp.s"
-	cd /home/remix/coding/cpp/serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/remix/coding/cpp/serializer/src/serializer/util.cpp -o CMakeFiles/serializer.dir/serializer/util.cpp.s
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && /bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/remix/文档/GitHub/muse-serializer/src/serializer/util.cpp -o CMakeFiles/serializer.dir/serializer/util.cpp.s
 
 # Object files for target serializer
 serializer_OBJECTS = \
@@ -109,18 +109,18 @@ src/libserializer.so: src/CMakeFiles/serializer.dir/serializer/binarySerializer.
 src/libserializer.so: src/CMakeFiles/serializer.dir/serializer/util.cpp.o
 src/libserializer.so: src/CMakeFiles/serializer.dir/build.make
 src/libserializer.so: src/CMakeFiles/serializer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/remix/coding/cpp/serializer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library libserializer.so"
-	cd /home/remix/coding/cpp/serializer/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/serializer.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/remix/文档/GitHub/muse-serializer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX shared library libserializer.so"
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/serializer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 src/CMakeFiles/serializer.dir/build: src/libserializer.so
 .PHONY : src/CMakeFiles/serializer.dir/build
 
 src/CMakeFiles/serializer.dir/clean:
-	cd /home/remix/coding/cpp/serializer/build/src && $(CMAKE_COMMAND) -P CMakeFiles/serializer.dir/cmake_clean.cmake
+	cd /home/remix/文档/GitHub/muse-serializer/build/src && $(CMAKE_COMMAND) -P CMakeFiles/serializer.dir/cmake_clean.cmake
 .PHONY : src/CMakeFiles/serializer.dir/clean
 
 src/CMakeFiles/serializer.dir/depend:
-	cd /home/remix/coding/cpp/serializer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/remix/coding/cpp/serializer /home/remix/coding/cpp/serializer/src /home/remix/coding/cpp/serializer/build /home/remix/coding/cpp/serializer/build/src /home/remix/coding/cpp/serializer/build/src/CMakeFiles/serializer.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/remix/文档/GitHub/muse-serializer /home/remix/文档/GitHub/muse-serializer/src /home/remix/文档/GitHub/muse-serializer/build /home/remix/文档/GitHub/muse-serializer/build/src /home/remix/文档/GitHub/muse-serializer/build/src/CMakeFiles/serializer.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : src/CMakeFiles/serializer.dir/depend
 

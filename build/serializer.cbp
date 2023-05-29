@@ -8,24 +8,24 @@
 		<Option virtualFolders="CMake Files\;CMake Files\src\;CMake Files\tests\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/home/remix/coding/cpp/serializer/build"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="runner">
-				<Option output="/home/remix/coding/cpp/serializer/build/runner" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/runner" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -35,21 +35,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 runner"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 runner"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="runner/fast">
-				<Option output="/home/remix/coding/cpp/serializer/build/runner" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/runner" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -59,51 +59,51 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 runner/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 runner/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="test">
-				<Option working_dir="/home/remix/coding/cpp/serializer/build"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 test"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 test"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/home/remix/coding/cpp/serializer/build"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/home/remix/coding/cpp/serializer/build"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="serializer">
-				<Option output="/home/remix/coding/cpp/serializer/build/src/libserializer.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build/src"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/src/libserializer.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build/src"/>
 				<Option object_output="./"/>
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -113,21 +113,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 serializer"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 serializer"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="serializer/fast">
-				<Option output="/home/remix/coding/cpp/serializer/build/src/libserializer.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build/src"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/src/libserializer.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build/src"/>
 				<Option object_output="./"/>
 				<Option type="3"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -137,21 +137,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 serializer/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 serializer/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/src/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="serializerUnit">
-				<Option output="/home/remix/coding/cpp/serializer/build/tests/serializerUnit" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build/tests"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/tests/serializerUnit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build/tests"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -161,21 +161,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 serializerUnit"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 serializerUnit"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="serializerUnit/fast">
-				<Option output="/home/remix/coding/cpp/serializer/build/tests/serializerUnit" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build/tests"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/tests/serializerUnit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build/tests"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -185,21 +185,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 serializerUnit/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 serializerUnit/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="toolkitUnit">
-				<Option output="/home/remix/coding/cpp/serializer/build/tests/toolkitUnit" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build/tests"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/tests/toolkitUnit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build/tests"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -209,21 +209,21 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 toolkitUnit"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 toolkitUnit"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="toolkitUnit/fast">
-				<Option output="/home/remix/coding/cpp/serializer/build/tests/toolkitUnit" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/remix/coding/cpp/serializer/build/tests"/>
+				<Option output="/home/remix/文档/GitHub/muse-serializer/build/tests/toolkitUnit" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/remix/文档/GitHub/muse-serializer/build/tests"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/home/remix/coding/cpp/serializer/include"/>
-					<Add directory="/home/remix/coding/cpp/serializer/external"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/include"/>
+					<Add directory="/home/remix/文档/GitHub/muse-serializer/external"/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -233,35 +233,35 @@
 					<Add directory="/usr/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 toolkitUnit/fast"/>
-					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/coding/cpp/serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 toolkitUnit/fast"/>
+					<CompileFile command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j16 -f &quot;/home/remix/文档/GitHub/muse-serializer/build/tests/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/remix/coding/cpp/serializer/main.cpp">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/main.cpp">
 			<Option target="runner"/>
 		</Unit>
-		<Unit filename="/home/remix/coding/cpp/serializer/src/serializer/binarySerializer.cpp">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/src/serializer/binarySerializer.cpp">
 			<Option target="serializer"/>
 		</Unit>
-		<Unit filename="/home/remix/coding/cpp/serializer/src/serializer/util.cpp">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/src/serializer/util.cpp">
 			<Option target="serializer"/>
 		</Unit>
-		<Unit filename="/home/remix/coding/cpp/serializer/tests/BinarySerializerUnit.cpp">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/tests/BinarySerializerUnit.cpp">
 			<Option target="serializerUnit"/>
 		</Unit>
-		<Unit filename="/home/remix/coding/cpp/serializer/tests/utilUnit.cpp">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/tests/utilUnit.cpp">
 			<Option target="toolkitUnit"/>
 		</Unit>
-		<Unit filename="/home/remix/coding/cpp/serializer/CMakeLists.txt">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
-		<Unit filename="/home/remix/coding/cpp/serializer/src/CMakeLists.txt">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/src/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\src\"/>
 		</Unit>
-		<Unit filename="/home/remix/coding/cpp/serializer/tests/CMakeLists.txt">
+		<Unit filename="/home/remix/文档/GitHub/muse-serializer/tests/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\tests\"/>
 		</Unit>
 	</Project>

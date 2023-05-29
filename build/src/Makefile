@@ -57,10 +57,10 @@ RM = /home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/remix/coding/cpp/serializer
+CMAKE_SOURCE_DIR = /home/remix/文档/GitHub/muse-serializer
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/remix/coding/cpp/serializer/build
+CMAKE_BINARY_DIR = /home/remix/文档/GitHub/muse-serializer/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -97,14 +97,14 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/remix/coding/cpp/serializer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/remix/coding/cpp/serializer/build/CMakeFiles /home/remix/coding/cpp/serializer/build/src//CMakeFiles/progress.marks
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/remix/coding/cpp/serializer/build/CMakeFiles 0
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/remix/文档/GitHub/muse-serializer/build/CMakeFiles /home/remix/文档/GitHub/muse-serializer/build/src//CMakeFiles/progress.marks
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/remix/文档/GitHub/muse-serializer/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/clean
 .PHONY : clean
 
 # The main clean target
@@ -113,22 +113,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/remix/coding/cpp/serializer/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 src/CMakeFiles/serializer.dir/rule:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/serializer.dir/rule
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 src/CMakeFiles/serializer.dir/rule
 .PHONY : src/CMakeFiles/serializer.dir/rule
 
 # Convenience name for target.
@@ -137,7 +137,7 @@ serializer: src/CMakeFiles/serializer.dir/rule
 
 # fast build rule for target.
 serializer/fast:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/build
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/build
 .PHONY : serializer/fast
 
 serializer/binarySerializer.o: serializer/binarySerializer.cpp.o
@@ -145,7 +145,7 @@ serializer/binarySerializer.o: serializer/binarySerializer.cpp.o
 
 # target to build an object file
 serializer/binarySerializer.cpp.o:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o
 .PHONY : serializer/binarySerializer.cpp.o
 
 serializer/binarySerializer.i: serializer/binarySerializer.cpp.i
@@ -153,7 +153,7 @@ serializer/binarySerializer.i: serializer/binarySerializer.cpp.i
 
 # target to preprocess a source file
 serializer/binarySerializer.cpp.i:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.i
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.i
 .PHONY : serializer/binarySerializer.cpp.i
 
 serializer/binarySerializer.s: serializer/binarySerializer.cpp.s
@@ -161,7 +161,7 @@ serializer/binarySerializer.s: serializer/binarySerializer.cpp.s
 
 # target to generate assembly for a file
 serializer/binarySerializer.cpp.s:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.s
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.s
 .PHONY : serializer/binarySerializer.cpp.s
 
 serializer/util.o: serializer/util.cpp.o
@@ -169,7 +169,7 @@ serializer/util.o: serializer/util.cpp.o
 
 # target to build an object file
 serializer/util.cpp.o:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/util.cpp.o
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/util.cpp.o
 .PHONY : serializer/util.cpp.o
 
 serializer/util.i: serializer/util.cpp.i
@@ -177,7 +177,7 @@ serializer/util.i: serializer/util.cpp.i
 
 # target to preprocess a source file
 serializer/util.cpp.i:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/util.cpp.i
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/util.cpp.i
 .PHONY : serializer/util.cpp.i
 
 serializer/util.s: serializer/util.cpp.s
@@ -185,7 +185,7 @@ serializer/util.s: serializer/util.cpp.s
 
 # target to generate assembly for a file
 serializer/util.cpp.s:
-	cd /home/remix/coding/cpp/serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/util.cpp.s
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(MAKE) $(MAKESILENT) -f src/CMakeFiles/serializer.dir/build.make src/CMakeFiles/serializer.dir/serializer/util.cpp.s
 .PHONY : serializer/util.cpp.s
 
 # Help Target
@@ -215,6 +215,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/remix/coding/cpp/serializer/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/remix/文档/GitHub/muse-serializer/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -1,1 +1,1 @@
-/bin/g++ -g CMakeFiles/serializerUnit.dir/BinarySerializerUnit.cpp.o -o serializerUnit  -Wl,-rpath,/home/remix/coding/cpp/serializer/build/src ../src/libserializer.so 
+/bin/g++ -g CMakeFiles/serializerUnit.dir/BinarySerializerUnit.cpp.o -o serializerUnit  -Wl,-rpath,/home/remix/文档/GitHub/muse-serializer/build/src ../src/libserializer.so 

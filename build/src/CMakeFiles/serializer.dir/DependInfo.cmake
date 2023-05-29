@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/remix/coding/cpp/serializer/src/serializer/binarySerializer.cpp" "src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o" "gcc" "src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o.d"
-  "/home/remix/coding/cpp/serializer/src/serializer/util.cpp" "src/CMakeFiles/serializer.dir/serializer/util.cpp.o" "gcc" "src/CMakeFiles/serializer.dir/serializer/util.cpp.o.d"
+  "/home/remix/文档/GitHub/muse-serializer/src/serializer/binarySerializer.cpp" "src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o" "gcc" "src/CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o.d"
+  "/home/remix/文档/GitHub/muse-serializer/src/serializer/util.cpp" "src/CMakeFiles/serializer.dir/serializer/util.cpp.o" "gcc" "src/CMakeFiles/serializer.dir/serializer/util.cpp.o.d"
   )
 
 # Targets to which this target links.

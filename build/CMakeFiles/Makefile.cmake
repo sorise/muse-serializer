@@ -7,12 +7,6 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/remix/coding/cpp/serializer/CMakeLists.txt"
-  "CMakeFiles/3.25.2/CMakeCCompiler.cmake"
-  "CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
-  "CMakeFiles/3.25.2/CMakeSystem.cmake"
-  "/home/remix/coding/cpp/serializer/src/CMakeLists.txt"
-  "/home/remix/coding/cpp/serializer/tests/CMakeLists.txt"
   "/home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCInformation.cmake"
   "/home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCXXInformation.cmake"
   "/home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/CMakeCommonLanguageInclude.cmake"
@@ -33,6 +27,12 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/Linux.cmake"
   "/home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/Platform/UnixPaths.cmake"
   "/home/remix/progress/clion-2022.3.3/bin/cmake/linux/x64/share/cmake-3.25/Modules/ProcessorCount.cmake"
+  "/home/remix/文档/GitHub/muse-serializer/CMakeLists.txt"
+  "CMakeFiles/3.25.2/CMakeCCompiler.cmake"
+  "CMakeFiles/3.25.2/CMakeCXXCompiler.cmake"
+  "CMakeFiles/3.25.2/CMakeSystem.cmake"
+  "/home/remix/文档/GitHub/muse-serializer/src/CMakeLists.txt"
+  "/home/remix/文档/GitHub/muse-serializer/tests/CMakeLists.txt"
   )
 
 # The corresponding makefile is:

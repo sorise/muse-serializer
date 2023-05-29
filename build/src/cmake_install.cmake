@@ -1,4 +1,4 @@
-# Install script for directory: /home/remix/coding/cpp/serializer/src
+# Install script for directory: /home/remix/文档/GitHub/muse-serializer/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

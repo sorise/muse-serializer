@@ -12,6 +12,8 @@
 #include <unordered_map>
 #include <set>
 
+static_assert(__cplusplus >= 201103L, "C++ version is not right" );
+
 //初始化容量大小
 #define MUSE_DEFAULT_CAPACITY 32
 //字符串的最大长度, 1MB 等于 1048576 字节， 0.5M 524288
@@ -40,11 +42,17 @@
     }
 
 
-static_assert(__cplusplus >= 201103L, "C++ version is not right" );
-
 namespace muse{
     class BinarySerializer final{
     private:
+        template<unsigned int N>
+        struct TupleWriter {
+            template<typename... Args>
+            static void write(const std::tuple<Args...>& t, BinarySerializer& serializer){
+                serializer.input(std::get<N>(t));
+                TupleWriter<N-1>::write(t, serializer);
+            }
+        };
         /* 存储字节流数据 */
         std::vector<char> byteStream;
         /* 读取指针 */
@@ -57,7 +65,6 @@ namespace muse{
         BinarySerializer& write(const char* data, const unsigned int& len);
         /* 读取 */
         bool read(char* data, const unsigned int& len) noexcept ;
-
     public:
         using Container_type = std::vector<char>;
         void clear();                            //清除所有
@@ -89,6 +96,7 @@ namespace muse{
             inputArgs(args...);
             return *this;
         };
+
         BinarySerializer& inputArgs() { return *this; };
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
@@ -114,8 +122,7 @@ namespace muse{
         }
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
-        BinarySerializer& input(const std::list<T> &value)
-        {
+        BinarySerializer& input(const std::list<T> &value){
             auto type = DataType::LIST;
             //写入类型
             write((char*)&type, sizeof(type));
@@ -160,22 +167,25 @@ namespace muse{
         }
 
         template<typename... Args>
-        BinarySerializer& input(const std::tuple<Args...> tpl){
+        BinarySerializer &input(std::tuple<Args...>tpl) {
             auto type = DataType::TUPLE;
             //写入类型
             write((char*)&type, sizeof(type));
-            //写入成员数量
+            //获得长度
             u_int32_t tupleSize = getTupleElementCount(tpl);
             if (tupleSize > MUSE_MAX_TUPLE_COUNT){
                 throw SerializerException("the tuple size exceeds the limit", ErrorNumber::TheTupleCountExceedsTheLimit);
             }
-            //写入成员数量
+            //写入长度
             write((char*)&tupleSize, sizeof(uint32_t));
-            //存储长度, 注意大小端问题
-            MUSE_TEMPLATE_CONVERT_TO_LITTLE_ENDIAN()
-            for (u_int32_t i = 0; i < tupleSize; ++i) {
-                input(std::get<i>(tpl));
+            //防止大小端问题
+            if (byteSequence == ByteSequence::BigEndian){
+                auto last = &byteStream[byteStream.size()];
+                auto first = last - sizeof(uint32_t);
+                std::reverse(first, last);
             }
+            constexpr size_t N = sizeof...(Args);
+            TupleWriter<N - 1>::write(tpl,*this);
             return *this;
         }
 
@@ -366,6 +376,13 @@ namespace muse{
         }
         BinarySerializer& outputArgs() { return *this; };
 
+
+#define MUSE_OUTPUT_TUPLE(i) \
+    typename std::tuple_element<i,decltype(tpl)>::type first; \
+    output(first);                         \
+    std::get<i>(tpl) = first;
+
+
         template<typename... Args>
         BinarySerializer& output(std::tuple<Args...>& tpl){
             //防止越界
@@ -374,10 +391,51 @@ namespace muse{
             if (byteStream[readPosition] != (char)DataType::MAP)
                 throw SerializerException("read type error", ErrorNumber::DataTypeError);
             auto defaultPosition = readPosition;
-            
+            readPosition++;
+            //获取 list 长度
+            auto tupleSize =  byteStream.size() - readPosition;
+            if (tupleSize < sizeof(uint32_t)){
+                readPosition = defaultPosition;
+                throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory);
+            }
+            //处理大小端
+            if (byteSequence == ByteSequence::BigEndian)
+            {
+                char* first = (char*)&tupleSize;
+                char* last = first + sizeof(uint32_t);
+                std::reverse(first, last);
+            }
+            //检测长度是否非法
+            if (tupleSize > MUSE_MAX_TUPLE_COUNT){
+                readPosition = defaultPosition;
+                throw SerializerException("illegal map k-v pair count" , ErrorNumber::IllegalMapKVCount);
+            }
+            readPosition += sizeof(uint32_t);
 
+            constexpr auto len = sizeof...(Args);
+            try {
+
+            }catch(SerializerException &serializerException) {
+                readPosition = defaultPosition;
+                throw serializerException;
+            }catch (std::exception &ex) {
+                readPosition = defaultPosition;
+                throw ex;
+            }catch (...){
+                readPosition = defaultPosition;
+                throw SerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
+            }
+            return *this;
         }
-
     };
+
+    template<>
+    struct BinarySerializer::TupleWriter<0> {
+        template<typename... Args>
+        static void write(const std::tuple<Args...>& t, BinarySerializer& serializer){
+            serializer.input(std::get<0>(t));
+        }
+    };
+
 }
 #endif //SERIALIZER_BINARY_SERIALIZER_H

@@ -4,7 +4,7 @@
 # compile CXX with /bin/g++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/remix/coding/cpp/serializer/include -I/home/remix/coding/cpp/serializer/external
+CXX_INCLUDES = -I/home/remix/文档/GitHub/muse-serializer/include -I/home/remix/文档/GitHub/muse-serializer/external
 
 CXX_FLAGS = -g -fdiagnostics-color=always -std=gnu++17
 

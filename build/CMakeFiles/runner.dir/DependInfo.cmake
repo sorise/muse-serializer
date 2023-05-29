@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/remix/coding/cpp/serializer/main.cpp" "CMakeFiles/runner.dir/main.cpp.o" "gcc" "CMakeFiles/runner.dir/main.cpp.o.d"
+  "/home/remix/文档/GitHub/muse-serializer/main.cpp" "CMakeFiles/runner.dir/main.cpp.o" "gcc" "CMakeFiles/runner.dir/main.cpp.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/remix/coding/cpp/serializer/build/src/CMakeFiles/serializer.dir/DependInfo.cmake"
+  "/home/remix/文档/GitHub/muse-serializer/build/src/CMakeFiles/serializer.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
