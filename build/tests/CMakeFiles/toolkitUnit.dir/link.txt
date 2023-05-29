@@ -1,0 +1,1 @@
+/bin/g++ -g CMakeFiles/toolkitUnit.dir/utilUnit.cpp.o -o toolkitUnit  -Wl,-rpath,/home/remix/coding/cpp/serializer/build/src ../src/libserializer.so 

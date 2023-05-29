@@ -1,0 +1,1 @@
+/bin/g++ -fPIC -g -shared -Wl,-soname,libserializer.so -o libserializer.so CMakeFiles/serializer.dir/serializer/binarySerializer.cpp.o CMakeFiles/serializer.dir/serializer/util.cpp.o 

@@ -1,0 +1,13 @@
+/home/remix/coding/cpp/serializer/build/CMakeFiles/runner.dir
+/home/remix/coding/cpp/serializer/build/CMakeFiles/test.dir
+/home/remix/coding/cpp/serializer/build/CMakeFiles/edit_cache.dir
+/home/remix/coding/cpp/serializer/build/CMakeFiles/rebuild_cache.dir
+/home/remix/coding/cpp/serializer/build/src/CMakeFiles/serializer.dir
+/home/remix/coding/cpp/serializer/build/src/CMakeFiles/test.dir
+/home/remix/coding/cpp/serializer/build/src/CMakeFiles/edit_cache.dir
+/home/remix/coding/cpp/serializer/build/src/CMakeFiles/rebuild_cache.dir
+/home/remix/coding/cpp/serializer/build/tests/CMakeFiles/serializerUnit.dir
+/home/remix/coding/cpp/serializer/build/tests/CMakeFiles/toolkitUnit.dir
+/home/remix/coding/cpp/serializer/build/tests/CMakeFiles/test.dir
+/home/remix/coding/cpp/serializer/build/tests/CMakeFiles/edit_cache.dir
+/home/remix/coding/cpp/serializer/build/tests/CMakeFiles/rebuild_cache.dir
