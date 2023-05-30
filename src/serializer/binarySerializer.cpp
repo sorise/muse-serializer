@@ -9,7 +9,7 @@ namespace muse{
 #define MUSE_CHECK_LEGITIMACY(TYPENAME, realName)                            \
     auto needLength = sizeof(DataType::TYPENAME) + sizeof(realName );        \
     if((byteStream.size() - readPosition) < needLength )                     \
-        throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory); \
+        throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
                                                                                     \
     if (byteStream[readPosition] != (char)DataType::TYPENAME)                       \
         throw SerializerException("read type error", ErrorNumber::DataTypeError);   \
@@ -39,7 +39,7 @@ namespace muse{
 
 #define MUSE_PREVENT_CROSSING_BOUNDARIES()              \
     if (readPosition == byteStream.size()){             \
-        throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory); \
+        throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
     }
 
     BinarySerializer::BinarySerializer():readPosition(0){
@@ -325,7 +325,7 @@ namespace muse{
         auto leftSize =  byteStream.size() - readPosition;
         if (leftSize < sizeof(uint32_t)){
             readPosition = defaultPosition;
-            throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory);
+            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //字符串长度,大小端处理
         auto stringLength = *((uint32_t *)(&byteStream[readPosition]));
@@ -345,7 +345,7 @@ namespace muse{
         leftSize =  byteStream.size() - defaultPosition;
         if (leftSize < stringLength){
             readPosition = defaultPosition;
-            throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory);
+            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //正确读取
         str.assign((char*)&byteStream[readPosition], stringLength);
@@ -365,7 +365,7 @@ namespace muse{
         auto leftSize =  byteStream.size() - readPosition;
         if (leftSize < sizeof(uint32_t)){
             readPosition = defaultPosition;
-            throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory);
+            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //字符串长度 大小端处理
         auto stringLength = *((uint32_t *)(&byteStream[readPosition]));
@@ -388,7 +388,7 @@ namespace muse{
         leftSize =  byteStream.size() - defaultPosition;
         if (leftSize < stringLength){
             readPosition = defaultPosition;
-            throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory);
+            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         std::memcpy(value,(char*)&byteStream[readPosition], stringLength);
         readPosition += static_cast<int>(stringLength);
@@ -407,7 +407,7 @@ namespace muse{
         auto leftSize =  byteStream.size() - readPosition;
         if (leftSize < sizeof(uint32_t)){
             readPosition = defaultPosition;
-            throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory);
+            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //字符串长度 大小端处理
         auto stringLength = *((uint32_t *)(&byteStream[readPosition]));
@@ -430,7 +430,7 @@ namespace muse{
         leftSize =  byteStream.size() - defaultPosition;
         if (leftSize < stringLength){
             readPosition = defaultPosition;
-            throw SerializerException("not enough remaining memory", ErrorNumber::InsufficientRemainingMemory);
+            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         std::memcpy(value,(char*)&byteStream[readPosition], stringLength);
         readPosition += static_cast<int>(stringLength);
