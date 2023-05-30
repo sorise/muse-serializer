@@ -12,6 +12,23 @@
 #include <tuple>
 
 namespace muse{
+    //初始化容量大小
+    #define MUSE_DEFAULT_CAPACITY 32
+    //字符串的最大长度, 1MB 等于 1048576 字节， 0.5M 524288
+    #define MUSE_MAX_STRING_LENGTH 65536
+    //Byte 长度 上限
+    #define MUSE_MAX_BYTE_COUNT 65536
+    //Vector 长度 数量上限
+    #define MUSE_MAX_VECTOR_COUNT 16777216
+    //List 长度 数量上限
+    #define MUSE_MAX_LIST_COUNT 16777216
+    //Map 健值对 数量上限
+    #define MUSE_MAX_MAP_COUNT 16777216
+    //Tuple 数量上限
+    #define MUSE_MAX_TUPLE_COUNT 64
+    //SET 成员数量上限
+    #define MUSE_MAX_SET_COUNT 16777216
+
     /*
      *  type: enum class DataType : char
      *  des: 支持序列化的数据类型
@@ -64,9 +81,13 @@ namespace muse{
         IllegalMapKVCount,                  /* Map数量非法 */
         TheTupleCountExceedsTheLimit,       /* Tuple长度超过 64   */
         IllegalTupleCount,                  /* Tuple数量非法 */
+        IllegalParameterTupleCount,         /* 传递的Tuple 元素数量不一致 */
         TheHashMapKVCountExceedsTheLimit,   /* HashMap长度超过 16777216   */
         IllegalHashMapKVCount,              /* HashMap数量非法 */
         ErrorReadingSubElements,            /* 读取子元素失败 */
+        TheSetSizeExceedsTheLimit,          /* Set 成员数量超过 16777216   */
+        IllegalSetCount,                    /* HashMap数量非法 */
+
     };
 
     /* 获取当前主机采用的字节序 */

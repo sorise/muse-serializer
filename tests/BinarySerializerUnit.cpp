@@ -284,3 +284,59 @@ TEST_CASE("binarySerializer - map<K,v>","[binarySerializer]"){
     REQUIRE( kvsOut["sd"] == kvs["sd"]);
     REQUIRE( kvsOut["sd23"] == kvs["sd23"]);
 }
+
+
+TEST_CASE("binarySerializer - component","[binarySerializer]"){
+    muse::BinarySerializer serializer;
+    bool sex = false;
+    uint16_t age = 25;
+    std::string name {"remix"};
+    std::vector<double> scores {95.5, 89.5, 90.5, 97.0};
+    std::list<std::string> friends {"muse", "coco", "uni", "tomes"};
+
+    serializer.inputArgs(sex, age, name, scores, friends);
+
+
+    bool sexOut;
+    uint16_t ageOut;
+    std::string nameOut;
+    std::vector<double> scoresOut;
+    std::list<std::string> friendsOut;
+
+
+    serializer.outputArgs(sexOut, ageOut, nameOut, scoresOut, friendsOut);
+
+    REQUIRE(nameOut == name);
+    REQUIRE(friends.front() == friendsOut.front());
+}
+
+TEST_CASE("binarySerializer - tuple<...>","[binarySerializer]"){
+    muse::BinarySerializer serializer;
+    //将元组序列化
+    std::tuple<std::string ,int ,float> tplOne { "remix", 25, 173.5};
+    serializer.input(tplOne);
+
+    //反序列化
+    std::tuple<std::string ,int ,float> tplOneOut;
+    serializer.output(tplOneOut);
+
+    REQUIRE(std::get<0>(tplOneOut) == std::get<0>(tplOne));
+    REQUIRE(std::get<2>(tplOneOut) == std::get<2>(tplOne));
+}
+
+TEST_CASE("binarySerializer - unordered_map<K,V>","[binarySerializer]"){
+    muse::BinarySerializer serializer;
+
+    std::unordered_map<std::string, uint32_t> dic;
+    dic["remix"] = 45;
+    dic["sorise"] = 74;
+
+    serializer.input(dic);
+
+    std::unordered_map<std::string, uint32_t> dicOut;
+    serializer.output(dicOut);
+
+    REQUIRE(dicOut.size() == 2);
+}
+
+
