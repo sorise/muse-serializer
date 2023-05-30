@@ -464,4 +464,38 @@ namespace muse{
     const char *BinarySerializer::getBinaryStream() const {
         return byteStream.data();
     }
+
+    void BinarySerializer::saveToFile(const std::string& path) const{
+        if (byteStream.empty()){
+            throw SerializerException("no data to store in file!", ErrorNumber::NoDataToStoreInFile);
+        }
+        std::ofstream saver(path,std::ios_base::binary | std::ios_base::trunc | std::ios_base::out );
+        if (!saver.fail() && saver.is_open()){
+            //数据量过大，会出现问题 unsigned long  到 long 的转换！ 且 long 能表示的数据量有限！
+            saver.write(byteStream.data(), byteStream.size());
+            saver.flush();
+        }else {
+            //文件路径错误
+            throw std::logic_error("the file path is not right!");
+        }
+        saver.close();
+    }
+
+    void BinarySerializer::loadFromFile(const std::string &path) {
+        std::ifstream loader(path,std::ios_base::binary  | std::ios_base::in );
+        if (!loader.fail() && loader.is_open()){
+           byteStream.clear();
+           readPosition = 0;
+           constexpr size_t bufferSize = 1024;
+           char loaderBuffer[bufferSize];
+           size_t readBytes = loader.readsome(loaderBuffer, bufferSize);
+           while (readBytes > 0){
+               write(loaderBuffer, readBytes);
+               readBytes = loader.readsome(loaderBuffer, bufferSize);
+           }
+        }else {
+            //文件路径错误
+            throw std::logic_error("the file path is not right!");
+        }
+    }
 }

@@ -353,3 +353,62 @@ TEST_CASE("binarySerializer - set<T>","[binarySerializer]"){
 }
 
 
+TEST_CASE("binarySerializer - muse class", "[binarySerializer]"){
+    class user: public muse::IBinarySerializable{
+    private:
+        std::string _name;
+        uint16_t _age;
+    public:
+        user(): user("",0){};
+        explicit user(const std::string& name, const uint16_t& age):_name(name), _age(age){};
+
+        MUSE_IBinarySerializable(_name, _age);
+
+        std::string getName() const{ return _name; };
+        uint16_t getAge() const{ return _age; };
+        ~user() = default;
+    };
+
+    muse::BinarySerializer serializer;
+    user me("remix", 25);
+
+    serializer.inputArgs(me);
+
+    user you("", 18);
+
+    serializer.output(you);
+
+    REQUIRE(you.getName() == me.getName());
+    REQUIRE(you.getAge() == me.getAge());
+}
+
+TEST_CASE("binarySerializer - save - load", "[binarySerializer]"){
+    muse::BinarySerializer serializer;
+
+    int a = 10;
+    serializer.input(a);
+
+    std::list<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
+    std::vector<double> scores = {84.01,98.1,15.2,98.2,15.89,84.01,98.1,15.2,98.2,15.89};
+
+    serializer.inputArgs(names, scores);
+
+    auto size = serializer.byteCount();
+    const char* streamPtr = serializer.getBinaryStream();
+
+    //存储到文件中
+    serializer.saveToFile("./serializer.dat");
+
+    //从文件中加载
+    muse::BinarySerializer loadSerializer;
+    loadSerializer.loadFromFile("./serializer.dat");
+
+    int aLoad;
+    std::list<std::string> namesLoad;
+    std::vector<double> scoresLoad;
+
+    loadSerializer.outputArgs(aLoad, namesLoad, scoresLoad);
+
+    REQUIRE( aLoad == 10 );
+    REQUIRE( scoresLoad[0] == scores[0]);
+}

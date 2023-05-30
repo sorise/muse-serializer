@@ -12,6 +12,9 @@
 #include <map>
 #include <unordered_map>
 #include <set>
+#include <fstream>
+#include <string>
+#include <sstream>
 
 static_assert(__cplusplus >= 201103L, "C++ version is not right" );
 
@@ -31,6 +34,8 @@ namespace muse{
     class IBinarySerializable; //define
 
     class BinarySerializer final{
+    public:
+        using Position_Type = long;
     private:
         template<unsigned int N>
         struct TupleWriter {
@@ -54,7 +59,7 @@ namespace muse{
         /* 存储字节流数据 */
         std::vector<char> byteStream;
         /* 读取指针 */
-        int readPosition;
+        Position_Type readPosition;
         /* 字节序 */
         ByteSequence byteSequence;
         /* 如果剩余空间不够了，就进行扩容，否则直接返回 */
@@ -67,16 +72,16 @@ namespace muse{
         using Container_type = std::vector<char>;
         void clear();                            //清除所有
         void reset();                            //重新从开始读取
-
         Container_type::size_type byteCount() const;                //多少字节数量
-        int getReadPosition() const;                                //获得当前指针所在位置
+        Position_Type getReadPosition() const;                      //获得当前指针所在位置
         bool checkDataTypeRightForward(DataType type);              //检查类型是否正确，如果正确，移动 readPosition
         BinarySerializer();                                         //默认构造函数
         BinarySerializer(const BinarySerializer& other) = delete;   //禁止复制
         BinarySerializer(BinarySerializer &&other) noexcept;        //支持移动操作
         const char* getBinaryStream() const;                        //返回二进制流的指针
 
-        bool saveToFile();
+        void saveToFile(const std::string& path) const;    //二进制数据存储到文件中
+        void loadFromFile(const std::string& path);  //从文件中加载二进制数据
 
         ~BinarySerializer();
 
@@ -615,7 +620,5 @@ namespace muse{
         if (!result) throw muse::SerializerException("read type error", muse::ErrorNumber::DataTypeError);                      \
         serializer.outputArgs(__VA_ARGS__);                                                                                     \
     }
-
-
 }
 #endif //MUSE_SERIALIZER_BINARY_SERIALIZER_H

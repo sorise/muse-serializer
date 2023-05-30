@@ -1,91 +1,43 @@
 ## [muse-serializer](#)
-**introduction**： A simple C++ Serialization library base on C++ 11/14/17.
+**介绍**： 一个实现简单的 C++ 序列化库，支持丰富的数据类型：整数、浮点数、布尔值、字符、字符串、二进制流、stl的部分容器、用户自定义类型，支持 C++ 11/14/17， 字节编码顺序为小端序。
 
 ----
 
 ```cpp
 #include "serializer/binarySerializer.h"
 
+//创建一个二进制序列化器
 muse::BinarySerializer serializer;
 
-bool sex = false;
-uint16_t age = 25;
-std::string name {"remix"};
-std::vector<double> scores {95.5, 89.5, 90.5, 97.0};
-std::list<std::string> friends {"muse", "coco", "uni", "tomes"};
+int a = 10;
 
-//序列化 serializer
-serializer.input(sex).input(age).input(name).input(scores).input(friends);
+//单个序列化
+serializer.input(a);
 
+std::list<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
+std::vector<double> scores = {84.01,98.1,15.2,98.2,15.89,84.01,98.1,15.2,98.2,15.89};
+//序列化
+serializer.inputArgs(names, scores);
 
-bool sexOut;
-uint16_t ageOut;
-std::string nameOut;
-std::vector<double> scoresOut;
-std::list<std::string> friendsOut;
+//存储到文件中
+serializer.saveToFile("./serializer.dat");
 
-//反序列化 deserializer
-serializer.output(sexOut).output(ageOut).output(nameOut).output(scoresOut).output(friendsOut);
+//从文件中加载
+muse::BinarySerializer loadSerializer;
 
-std::cout << nameOut << std::endl; //remix
-```
+loadSerializer.loadFromFile("./serializer.dat");
 
-### [1. Usage](#)
-使用方法， API 非常简单！
-
-| API                                        | 功能                   | 异常说明                                       |
-|:-------------------------------------------|:---------------------|:-------------------------------------------|
-| input(parameter)                           | 将参数二进制序列化            | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
-| template\<typename... Args\><br/>inputArgs(arg) | 将不定参数二进制序列化          | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
-| output(parameter)                          | 将参数二进制反序列化           | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
-| template\<typename... Args\><br/>outputArgs(arg)    | 将不定参数二进制反序列化         | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
-| clear()                                    | 清除所有内容               | 无                                          |
-| reset()                                    | 将读取指针设置到第一个位置，重新反序列化 | 无                                          |
-| byteCount()                                | 返回已经存储的字节数量          | 无                                          |
-
-#### [1.1 input/output](#)
-input/output 是最基本的API（It is the most basic API）： 
-
-```cpp
-#include "serializer/binarySerializer.h"
-    
-muse::BinarySerializer serializer;
-//将元组序列化
-std::tuple<std::string ,int ,float> tplOne { "remix", 25, 173.5};
-serializer.input(tplOne);
+int aLoad;
+std::list<std::string> namesLoad; 
+std::vector<double> scoresLoad;
 
 //反序列化
-std::tuple<std::string ,int ,float> tplOneOut;
-serializer.output(tplOneOut);
+loadSerializer.outputArgs(aLoad, namesLoad, scoresLoad);
+
+std::cout << scoresLoad[0] << std::endl; //84.01
 ```
 
-#### [1.2 inputArgs/outputArgs](#)
-支持可变参数，可以使得代码更加简洁(Support for variable parameters can make the code more concise:):
-
-```cpp
-muse::BinarySerializer serializer;
-
-bool sex = false;
-uint16_t age = 25;
-std::string name {"remix"};
-
-serializer.inputArgs(sex, age, name);
-
-
-bool sexOut;
-uint16_t ageOut;
-std::string nameOut;
-
-serializer.outputArgs(sexOut, ageOut, nameOut);
-
-std::cout << nameOut << std::endl; //remix
-```
-
-#### [1.3 get bianry stream pointer](#)
-获得序列化后的字节流指针：
-
-
-### [2. Support data types](#)
+### [1. 支持的数据类型](#)
 二进制序列化器 binarySerializer 支持数据类型：
 
 | 数据类型                      | 额外信息字节        | 说明                                |
@@ -110,4 +62,120 @@ std::cout << nameOut << std::endl; //remix
 | std::tuple\<...\>         | 1+2 = 3       | 元组元素需要支持默认构造函数                    |
 | std::set\<T\>             | 1+4 = 5       | T需要支持默认构造函数                       |
 | **MUSECLASS**             | 1             | 用户自定义类型，需要实现接口，继承抽象类！             |
+
+### [2. 使用方法](#)
+使用方法， API 非常简单！
+
+| API                                        | 功能                   | 异常说明                                       |
+|:-------------------------------------------|:---------------------|:-------------------------------------------|
+| input(parameter)                           | 将参数二进制序列化            | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
+| template\<typename... Args\><br/>inputArgs(arg) | 将不定参数二进制序列化          | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
+| output(parameter)                          | 将参数二进制反序列化           | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
+| template\<typename... Args\><br/>outputArgs(arg)    | 将不定参数二进制反序列化         | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
+| clear()                                    | 清除所有内容               | 无                                          |
+| reset()                                    | 将读取指针设置到第一个位置，重新反序列化 | 无                                          |
+| byteCount()                                | 返回已经存储的字节数量          | 无                                          |
+
+#### [2.1 单个参数的序列化](#)
+input/output 是最基本的API（It is the most basic API）： 
+
+```cpp
+#include "serializer/binarySerializer.h"
+    
+muse::BinarySerializer serializer;
+//将元组序列化
+std::tuple<std::string ,int ,float> tplOne { "remix", 25, 173.5};
+serializer.input(tplOne);
+
+//反序列化
+std::tuple<std::string ,int ,float> tplOneOut;
+serializer.output(tplOneOut);
+```
+
+#### [2.2 可变参数序列化](#)
+支持可变参数，可以使得代码更加简洁(Support for variable parameters can make the code more concise:):
+
+```cpp
+muse::BinarySerializer serializer;
+
+bool sex = false;
+uint16_t age = 25;
+std::string name {"remix"};
+
+serializer.inputArgs(sex, age, name);
+
+
+bool sexOut;
+uint16_t ageOut;
+std::string nameOut;
+
+serializer.outputArgs(sexOut, ageOut, nameOut);
+
+std::cout << nameOut << std::endl; //remix
+```
+
+#### [2.3 用户自定义类型序列化](#)
+用户自定义类型需要继承抽象类 **IBinarySerializable** ,然后调用宏函数 **MUSE_IBinarySerializable** 指定字段名称就可以完成序列化。 
+
+```cpp
+class user: public muse::IBinarySerializable{
+private:
+    std::string _name;
+    uint16_t _age;
+public:
+    user(): user("",0){};
+    explicit user(const std::string& name, const uint16_t& age):_name(name), _age(age){};
+
+    MUSE_IBinarySerializable(_name, _age);
+
+    std::string getName() const{ return _name; };
+    uint16_t getAge() const{ return _age; };
+    ~user() = default;
+};
+
+muse::BinarySerializer serializer;
+user me("remix", 25);
+
+serializer.inputArgs(me);
+
+user you("", 18);
+
+serializer.output(you);
+
+std::cout << you.getName() == me.getName() << std::endl; //true
+```
+
+#### [2.4 二进制流信息](#)
+获得序列化后的字节流指针：
+```cpp
+muse::BinarySerializer serializer;
+/*
+ * 其他操作
+*/
+auto size = serializer.byteCount();  //当前已经存储了多少字节的数据
+
+const char* streamPtr = serializer.getBinaryStream(); //获取数据流的指针
+```
+
+#### [2.5 将数据存储到文件中](#)
+调用方法 **saveToFile** 将数据流存储到文件中， 如果没有任何数据会抛出异常。
+```cpp
+muse::BinarySerializer serializer;
+/*
+ * 其他操作
+*/
+serializer.saveToFile("./serializer.dat");
+```
+
+#### [2.6 从文件中加载数据](#)
+从文件中直接加载数据，可能需要优化！
+```cpp
+muse::BinarySerializer serializer;
+/*
+ * 其他操作
+*/
+serializer.loadFromFile("./serializer.dat");
+```
+
+
 

@@ -87,6 +87,7 @@ namespace muse{
         ErrorReadingSubElements,            /* 读取子元素失败 */
         TheSetSizeExceedsTheLimit,          /* Set 成员数量超过 16777216   */
         IllegalSetCount,                    /* HashMap数量非法 */
+        NoDataToStoreInFile,                /* 没有数据可以存储到文件中 */
 
     };
 
