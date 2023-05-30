@@ -5,6 +5,7 @@
 
 namespace muse{
 
+    /* 获取当前主机采用的字节序 */
     ByteSequence getByteSequence(){
         int32_t testValue = 0x01234567;
         char bytes[sizeof(int32_t)];
@@ -17,6 +18,10 @@ namespace muse{
 
     SerializerException::SerializerException(const std::string &arg, ErrorNumber number)
     :logic_error(arg), errorNumber(number) {}
+
+    ErrorNumber SerializerException::getErrorNumber() {
+        return errorNumber;
+    }
 
     SerializerException::~SerializerException() = default;
 }

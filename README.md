@@ -33,15 +33,15 @@ std::cout << nameOut << std::endl; //remix
 ### [1. Usage](#)
 使用方法， API 非常简单！
 
-| API               | 功能                   | 异常说明                                       |
-|:------------------|:---------------------|:-------------------------------------------|
-| input(parameter)  | 将参数二进制序列化            | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
-| template\<typename... Args\>inputArgs(arg)  | 将不定参数二进制序列化          | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
-| output(parameter) | 将参数二进制反序列化           | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
-| template\<typename... Args\>output(arg) | 将不定参数二进制反序列化         | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
-| clear() | 清除所有内容               | 无                                          |
-| reset() | 将读取指针设置到第一个位置，重新反序列化 | 无                                          |
-| byteCount()       | 返回已经存储的字节数量          | 无                                          |
+| API                                        | 功能                   | 异常说明                                       |
+|:-------------------------------------------|:---------------------|:-------------------------------------------|
+| input(parameter)                           | 将参数二进制序列化            | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
+| template\<typename... Args\><br/>inputArgs(arg) | 将不定参数二进制序列化          | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
+| output(parameter)                          | 将参数二进制反序列化           | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
+| template\<typename... Args\><br/>outputArgs(arg)    | 将不定参数二进制反序列化         | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
+| clear()                                    | 清除所有内容               | 无                                          |
+| reset()                                    | 将读取指针设置到第一个位置，重新反序列化 | 无                                          |
+| byteCount()                                | 返回已经存储的字节数量          | 无                                          |
 
 #### [1.1 input/output](#)
 input/output 是最基本的API（It is the most basic API）： 
@@ -64,25 +64,25 @@ serializer.output(tplOneOut);
 
 ```cpp
 muse::BinarySerializer serializer;
+
 bool sex = false;
 uint16_t age = 25;
 std::string name {"remix"};
-std::vector<double> scores {95.5, 89.5, 90.5, 97.0};
-std::list<std::string> friends {"muse", "coco", "uni", "tomes"};
 
-serializer.inputArgs(sex, age, name, scores, friends);
+serializer.inputArgs(sex, age, name);
 
 
 bool sexOut;
 uint16_t ageOut;
 std::string nameOut;
-std::vector<double> scoresOut;
-std::list<std::string> friendsOut;
 
-serializer.outputArgs(sexOut, ageOut, nameOut, scoresOut, friendsOut);
+serializer.outputArgs(sexOut, ageOut, nameOut);
+
 std::cout << nameOut << std::endl; //remix
 ```
 
+#### [1.3 get bianry stream pointer](#)
+获得序列化后的字节流指针：
 
 
 ### [2. Support data types](#)
@@ -109,5 +109,5 @@ std::cout << nameOut << std::endl; //remix
 | std::unordered_map\<K,V\> | 1+4 = 5       | 哈希字典,K,V是支持类型，并且需要支持默认构造函数        |
 | std::tuple\<...\>         | 1+2 = 3       | 元组元素需要支持默认构造函数                    |
 | std::set\<T\>             | 1+4 = 5       | T需要支持默认构造函数                       |
-| **Class**                 | 1             | 用户自定义类型，需要实现接口，继承抽象类！             |
+| **MUSECLASS**             | 1             | 用户自定义类型，需要实现接口，继承抽象类！             |
 

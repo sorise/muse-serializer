@@ -4,7 +4,7 @@
 #include "serializer/binarySerializer.h"
 
 namespace muse{
-
+    class IBinarySerializable;
 /* 进行反序列合法性检测 */
 #define MUSE_CHECK_LEGITIMACY(TYPENAME, realName)                            \
     auto needLength = sizeof(DataType::TYPENAME) + sizeof(realName );        \
@@ -96,7 +96,7 @@ namespace muse{
         readPosition = 0;
     }
 
-    BinarySerializer::Container_type::size_type BinarySerializer::byteCount() {
+    BinarySerializer::Container_type::size_type BinarySerializer::byteCount() const{
         return byteStream.size();
     }
 
@@ -437,5 +437,31 @@ namespace muse{
         return *this;
     }
 
+    int BinarySerializer::getReadPosition() const {
+        return readPosition;
+    }
 
+    bool BinarySerializer::checkDataTypeRightForward(DataType dt){
+        //防止初次访问越界
+        MUSE_PREVENT_CROSSING_BOUNDARIES()
+        if (byteStream[readPosition] == (char)dt){
+            readPosition++;
+            return true;
+        }
+        return false;
+    }
+
+    BinarySerializer &BinarySerializer::input(const IBinarySerializable &serializable) {
+        serializable.serialize(*this);
+        return *this;
+    }
+
+    BinarySerializer &BinarySerializer::output(IBinarySerializable &serializable) {
+        serializable.deserialize(*this);
+        return *this;
+    }
+
+    const char *BinarySerializer::getBinaryStream() const {
+        return byteStream.data();
+    }
 }

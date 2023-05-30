@@ -1,1 +1,0 @@
-/bin/g++ -g CMakeFiles/runner.dir/main.cpp.o -o runner  -Wl,-rpath,/home/remix/文档/GitHub/muse-serializer/build/src src/libserializer.so 

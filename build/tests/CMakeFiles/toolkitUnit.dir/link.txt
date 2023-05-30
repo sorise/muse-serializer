@@ -1,1 +1,0 @@
-/bin/g++ -g CMakeFiles/toolkitUnit.dir/utilUnit.cpp.o -o toolkitUnit  -Wl,-rpath,/home/remix/文档/GitHub/muse-serializer/build/src ../src/libserializer.so 

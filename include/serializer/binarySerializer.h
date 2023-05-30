@@ -5,6 +5,7 @@
 #ifndef MUSE_SERIALIZER_BINARY_SERIALIZER_H
 #define MUSE_SERIALIZER_BINARY_SERIALIZER_H
 #include "serializer/util.h"
+#include "serializer/IbinarySerializable.h"
 #include <algorithm>
 #include <climits>
 #include <list>
@@ -26,8 +27,9 @@ static_assert(__cplusplus >= 201103L, "C++ version is not right" );
         throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
     }
 
-
 namespace muse{
+    class IBinarySerializable; //define
+
     class BinarySerializer final{
     private:
         template<unsigned int N>
@@ -57,19 +59,25 @@ namespace muse{
         ByteSequence byteSequence;
         /* 如果剩余空间不够了，就进行扩容，否则直接返回 */
         void expansion(size_t len);
-        /* 最基础的写入方法 */
-        BinarySerializer& write(const char* data, const unsigned int& len);
         /* 读取 */
         bool read(char* data, const unsigned int& len) noexcept ;
     public:
+        /* 最基础的写入方法 */
+        BinarySerializer& write(const char* data, const unsigned int& len);
         using Container_type = std::vector<char>;
         void clear();                            //清除所有
         void reset();                            //重新从开始读取
-        Container_type::size_type byteCount();   //多少字节数量
 
-        BinarySerializer();
-        BinarySerializer(const BinarySerializer& other) = delete; //禁止复制
-        BinarySerializer(BinarySerializer &&other) noexcept; //支持移动操作
+        Container_type::size_type byteCount() const;                //多少字节数量
+        int getReadPosition() const;                                //获得当前指针所在位置
+        bool checkDataTypeRightForward(DataType type);              //检查类型是否正确，如果正确，移动 readPosition
+        BinarySerializer();                                         //默认构造函数
+        BinarySerializer(const BinarySerializer& other) = delete;   //禁止复制
+        BinarySerializer(BinarySerializer &&other) noexcept;        //支持移动操作
+        const char* getBinaryStream() const;                        //返回二进制流的指针
+
+        bool saveToFile();
+
         ~BinarySerializer();
 
         BinarySerializer& input(const bool&);
@@ -85,15 +93,7 @@ namespace muse{
         BinarySerializer& input(const std::string &);
         BinarySerializer& input(const char*, unsigned int);
         BinarySerializer& input(const unsigned char*, unsigned int);
-
-        template<typename T, typename... Args>
-        BinarySerializer& inputArgs(const T& value, const Args&... args) {
-            input(value);
-            inputArgs(args...);
-            return *this;
-        };
-
-        BinarySerializer& inputArgs() { return *this; };
+        BinarySerializer &input(const muse::IBinarySerializable &serializable);
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
         BinarySerializer& input(const std::vector<T>& value){
@@ -141,7 +141,7 @@ namespace muse{
         template<typename K, typename V,
                 typename = typename std::enable_if_t<std::is_default_constructible_v<K>>,
                 typename = typename std::enable_if_t<std::is_default_constructible_v<V>>
-                >
+        >
         BinarySerializer& input(const std::map<K,V> &value){
             auto type = DataType::MAP;
             //写入类型
@@ -228,6 +228,14 @@ namespace muse{
             TupleWriter<N - 1>::write(tpl,*this);
             return *this;
         }
+
+        template<typename T, typename... Args>
+        BinarySerializer& inputArgs(const T& value, const Args&... args) {
+            input(value);
+            inputArgs(args...);
+            return *this;
+        };
+        BinarySerializer& inputArgs() { return *this; };
 
         /* 防止无端的类型转换错误 */
         BinarySerializer& input(const char*) = delete;
@@ -570,6 +578,8 @@ namespace muse{
             }
             return *this;
         }
+
+        BinarySerializer &output(muse::IBinarySerializable &serializable);
     };
 
     template<>
@@ -588,5 +598,24 @@ namespace muse{
             serializer.output(std::get<0>(t));
         }
     };
+
+#define MUSE_IBinarySerializable(...)   \
+    void serialize(muse::BinarySerializer &serializer) const override{     \
+        auto type = muse::DataType::MUSECLASS;                             \
+        serializer.write((char*)&type, sizeof(type));                \
+        serializer.inputArgs(__VA_ARGS__);                           \
+    };                                                               \
+                                                                     \
+    void deserialize(muse::BinarySerializer &serializer)  override {    \
+        auto readPosition = serializer.getReadPosition();               \
+        if (readPosition == serializer.byteCount()){                    \
+            throw muse::SerializerException("remaining memory is not enough ", muse::ErrorNumber::InsufficientRemainingMemory); \
+        }                                                                                                                       \
+        auto result = serializer.checkDataTypeRightForward(muse::DataType::MUSECLASS);                                          \
+        if (!result) throw muse::SerializerException("read type error", muse::ErrorNumber::DataTypeError);                      \
+        serializer.outputArgs(__VA_ARGS__);                                                                                     \
+    }
+
+
 }
 #endif //MUSE_SERIALIZER_BINARY_SERIALIZER_H

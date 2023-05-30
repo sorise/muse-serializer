@@ -55,7 +55,7 @@ namespace muse{
         TUPLE,      //元组 - tuple
         HASHMAP,    //字典 - Hash map
         SET,        //集合 - Set
-        CUSTOM      //用户自定义类型
+        MUSECLASS   //用户自定义类型
     };
 
     enum class ByteSequence: short
@@ -110,6 +110,7 @@ namespace muse{
     public:
         explicit SerializerException(const std::string &arg, ErrorNumber err);
         ~SerializerException() override ;
+        ErrorNumber getErrorNumber(); //返回错误号
     private:
         ErrorNumber errorNumber;
     };

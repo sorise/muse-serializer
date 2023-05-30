@@ -296,7 +296,6 @@ TEST_CASE("binarySerializer - component","[binarySerializer]"){
 
     serializer.inputArgs(sex, age, name, scores, friends);
 
-
     bool sexOut;
     uint16_t ageOut;
     std::string nameOut;
@@ -337,6 +336,20 @@ TEST_CASE("binarySerializer - unordered_map<K,V>","[binarySerializer]"){
     serializer.output(dicOut);
 
     REQUIRE(dicOut.size() == 2);
+}
+
+TEST_CASE("binarySerializer - set<T>","[binarySerializer]"){
+    muse::BinarySerializer serializer;
+
+    std::set<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
+
+    serializer.input(names);
+
+    std::set<std::string> namesOut;
+
+    serializer.output(namesOut);
+
+    REQUIRE(namesOut.size() == 5);
 }
 
 
