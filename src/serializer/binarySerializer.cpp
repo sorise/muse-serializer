@@ -437,7 +437,7 @@ namespace muse{
         return *this;
     }
 
-    int BinarySerializer::getReadPosition() const {
+    BinarySerializer::Position_Type BinarySerializer::getReadPosition() const {
         return readPosition;
     }
 
@@ -472,7 +472,7 @@ namespace muse{
         std::ofstream saver(path,std::ios_base::binary | std::ios_base::trunc | std::ios_base::out );
         if (!saver.fail() && saver.is_open()){
             //数据量过大，会出现问题 unsigned long  到 long 的转换！ 且 long 能表示的数据量有限！
-            saver.write(byteStream.data(), byteStream.size());
+            saver.write(byteStream.data(), (long)byteStream.size());
             saver.flush();
         }else {
             //文件路径错误

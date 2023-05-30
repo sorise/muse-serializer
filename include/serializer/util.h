@@ -15,7 +15,7 @@ namespace muse{
     //初始化容量大小
     #define MUSE_DEFAULT_CAPACITY 32
     //字符串的最大长度, 1MB 等于 1048576 字节， 0.5M 524288
-    #define MUSE_MAX_STRING_LENGTH 65536
+    #define MUSE_MAX_STRING_LENGTH 1048576
     //Byte 长度 上限
     #define MUSE_MAX_BYTE_COUNT 65536
     //Vector 长度 数量上限

@@ -177,5 +177,18 @@ muse::BinarySerializer serializer;
 serializer.loadFromFile("./serializer.dat");
 ```
 
+### [3. 约束信息](#)
+一些限制:
 
+| 类型                   | 约束                                            | 宏                      |
+|----------------------|-----------------------------------------------|------------------------|
+| std::string          | 字符串长度上限：1048576`/`1M                          | MUSE_MAX_STRING_LENGTH |
+| 字节流                  | 字节流最长为 65536                                  | MUSE_MAX_BYTE_COUNT    |
+| tuple\<...\>         | 元组类型长度最多 64, **T** 需要具有默认构造函数                 | MUSE_MAX_TUPLE_COUNT   |
+| vector\<T\>          | 元素个数最多 16777216, **T** 需要具有默认构造函数             | MUSE_MAX_VECTOR_COUNT  |
+| list\<T\>            | 元素个数最多 16777216, **T** 需要具有默认构造函数             | MUSE_MAX_LIST_COUNT    |
+| set\<T\>             | 元素个数最多 16777216, **T** 需要具有默认构造函数             | MUSE_MAX_SET_COUNT     |
+| map\<K,V\>           | 元素个数最多 16777216, **K,V** 需要具有默认构造函数           | MUSE_MAX_MAP_COUNT     |
+| unordered_map\<K,V\> | 元素个数最多 16777216, **K,V** 需要具有默认构造函数           | MUSE_MAX_LIST_COUNT    |
+| 用户自定义类型              | 需要继承 纯虚类 **IBinarySerializable** ，使用宏函数来实现接口。 | MUSE_IBinarySerializable(...)                     |
 
