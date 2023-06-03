@@ -4,7 +4,6 @@
 #include "serializer/util.h"
 
 namespace muse{
-
     /* 获取当前主机采用的字节序 */
     ByteSequence getByteSequence(){
         int32_t testValue = 0x01234567;

@@ -4,7 +4,7 @@
 
 #ifndef SERIALIZER_I_BINARY_SERIALIZABLE_H
 #define SERIALIZER_I_BINARY_SERIALIZABLE_H 2
-#include "serializer/binarySerializer.h"
+#include "binarySerializer.h"
 
 //接口类
 namespace muse {

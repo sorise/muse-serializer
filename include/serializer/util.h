@@ -68,8 +68,8 @@ namespace muse{
     enum class ErrorNumber: short {
         DataTypeError = 0,                  /* 读取类型错误 */
         InsufficientRemainingMemory,        /* 剩余空间不足 */
-        TheStringLengthExceedsTheLimit,     /* 字符串长度超过 65536 */
-        IllegalStringLength,                /* 字符串长度非法 */
+        TheStringLengthExceedsTheLimit,     /* 字符串长度超过 1048576 */
+        IllegalStringLength,                /* 字符串长度非法 1048576*/
         TheBytesCountExceedsTheLimit,       /* 字节数量超过 65536 */
         IllegalBytesCount,                  /* 字节数量非法 */
         ReadIllegalBytesCount,              /* 你存储了X个字节，但是读取了Y个， (X！=Y) */

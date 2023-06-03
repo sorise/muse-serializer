@@ -4,8 +4,8 @@
 
 #ifndef MUSE_SERIALIZER_BINARY_SERIALIZER_H
 #define MUSE_SERIALIZER_BINARY_SERIALIZER_H
-#include "serializer/util.h"
-#include "serializer/IbinarySerializable.h"
+#include "util.h"
+#include "IbinarySerializable.h"
 #include <algorithm>
 #include <climits>
 #include <list>
