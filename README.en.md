@@ -37,8 +37,8 @@ std::cout << nameOut << std::endl; //remix
 |:-------------------------------------------|:---------------------|:-------------------------------------------|
 | input(parameter)                           | 将参数二进制序列化            | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
 | template\<typename... Args\><br/>inputArgs(arg) | 将不定参数二进制序列化          | 大量数据下可能抛出 `std::bad_alloc` 内存不足异常          |
-| output(parameter)                          | 将参数二进制反序列化           | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
-| template\<typename... Args\><br/>outputArgs(arg)    | 将不定参数二进制反序列化         | 如果失败，抛出自定义异常 `SerializerException`(util.h) |
+| output(parameter)                          | 将参数二进制反序列化           | 如果失败，抛出自定义异常 `BinarySerializerException`(util.h) |
+| template\<typename... Args\><br/>outputArgs(arg)    | 将不定参数二进制反序列化         | 如果失败，抛出自定义异常 `BinarySerializerException`(util.h) |
 | clear()                                    | 清除所有内容               | 无                                          |
 | reset()                                    | 将读取指针设置到第一个位置，重新反序列化 | 无                                          |
 | byteCount()                                | 返回已经存储的字节数量          | 无                                          |

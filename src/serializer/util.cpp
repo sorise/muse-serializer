@@ -15,12 +15,12 @@ namespace muse{
         return ByteSequence::LittleEndian;
     }
 
-    SerializerException::SerializerException(const std::string &arg, ErrorNumber number)
+    BinarySerializerException::BinarySerializerException(const std::string &arg, ErrorNumber number)
     :logic_error(arg), errorNumber(number) {}
 
-    ErrorNumber SerializerException::getErrorNumber() {
+    ErrorNumber BinarySerializerException::getErrorNumber() {
         return errorNumber;
     }
 
-    SerializerException::~SerializerException() = default;
+    BinarySerializerException::~BinarySerializerException() = default;
 }

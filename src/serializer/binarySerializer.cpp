@@ -7,12 +7,12 @@ namespace muse{
     class IBinarySerializable;
 /* 进行反序列合法性检测 */
 #define MUSE_CHECK_LEGITIMACY(TYPENAME, realName)                            \
-    auto needLength = sizeof(DataType::TYPENAME) + sizeof(realName );        \
+    auto needLength = sizeof(BinaryDataType::TYPENAME) + sizeof(realName );        \
     if((byteStream.size() - readPosition) < needLength )                     \
-        throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
+        throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
                                                                                     \
-    if (byteStream[readPosition] != (char)DataType::TYPENAME)                       \
-        throw SerializerException("read type error", ErrorNumber::DataTypeError);   \
+    if (byteStream[readPosition] != (char)BinaryDataType::TYPENAME)                       \
+        throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);   \
 
 
 /* 反序列化过程化中：如果主机是大端序，则转换为大端序 */
@@ -39,7 +39,7 @@ namespace muse{
 
 #define MUSE_PREVENT_CROSSING_BOUNDARIES()              \
     if (readPosition == byteStream.size()){             \
-        throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
+        throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
     }
 
     BinarySerializer::BinarySerializer():readPosition(0){
@@ -101,70 +101,70 @@ namespace muse{
     }
 
     BinarySerializer& BinarySerializer::input(const bool &value) {
-        auto type = DataType::BOOL;
+        auto type = BinaryDataType::BOOL;
         write((char*)&type, sizeof(type)); //类型
         write((char*)&value, sizeof(char)); //值
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const char & value) {
-        auto type = DataType::CHAR;
+        auto type = BinaryDataType::CHAR;
         write((char*)&type, sizeof(type)); //类型
         write((char*)&value, sizeof(char)); //值
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const int16_t & value) {
-        auto type = DataType::INT16;
+        auto type = BinaryDataType::INT16;
         auto dataTypeSize = sizeof(int16_t);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const int32_t & value) {
-        auto type = DataType::INT32;
+        auto type = BinaryDataType::INT32;
         auto dataTypeSize = sizeof(int32_t);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const int64_t & value) {
-        auto type = DataType::INT64;
+        auto type = BinaryDataType::INT64;
         auto dataTypeSize = sizeof(int64_t);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const uint16_t & value) {
-        auto type = DataType::UINT16;
+        auto type = BinaryDataType::UINT16;
         auto dataTypeSize = sizeof(uint16_t);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const uint32_t & value) {
-        auto type = DataType::UINT32;
+        auto type = BinaryDataType::UINT32;
         auto dataTypeSize = sizeof(uint32_t);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const uint64_t & value) {
-        auto type = DataType::UINT64;
+        auto type = BinaryDataType::UINT64;
         auto dataTypeSize = sizeof(uint64_t);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const float & value) {
-        auto type = DataType::FLOAT;
+        auto type = BinaryDataType::FLOAT;
         auto dataTypeSize = sizeof(float);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
     }
 
     BinarySerializer &BinarySerializer::input(const double & value) {
-        auto type = DataType::DOUBLE;
+        auto type = BinaryDataType::DOUBLE;
         auto dataTypeSize = sizeof(double);
         MUSE_CONVERT_TO_LITTLE_ENDIAN()
         return *this;
@@ -174,9 +174,9 @@ namespace muse{
         uint32_t len = value.length();              //存储字符串长度
         //字符串长度不能超过  MUSE_MAX_STRING_LENGTH 规定
         if (len > MUSE_MAX_STRING_LENGTH){
-            throw SerializerException("the string length exceeds the limit", ErrorNumber::TheStringLengthExceedsTheLimit);
+            throw BinarySerializerException("the string length exceeds the limit", ErrorNumber::TheStringLengthExceedsTheLimit);
         }
-        auto type = DataType::STRING;
+        auto type = BinaryDataType::STRING;
         write((char*)&type, sizeof(type)); //类型
         //存储长度
         write((char*)&len, sizeof(uint32_t));
@@ -196,9 +196,9 @@ namespace muse{
      */
     BinarySerializer &BinarySerializer::input(const char * value, unsigned int len) {
         if (len > MUSE_MAX_BYTE_COUNT){
-            throw SerializerException("the bytes count exceeds the limit", ErrorNumber::TheBytesCountExceedsTheLimit);
+            throw BinarySerializerException("the bytes count exceeds the limit", ErrorNumber::TheBytesCountExceedsTheLimit);
         }
-        auto type = DataType::BYTES;
+        auto type = BinaryDataType::BYTES;
         write((char*)&type, sizeof(type)); //类型
         //存储长度
         write((char*)&len, sizeof(uint32_t));
@@ -218,9 +218,9 @@ namespace muse{
      */
     BinarySerializer &BinarySerializer::input(const unsigned char * value, unsigned int len) {
         if (len > MUSE_MAX_BYTE_COUNT){
-            throw SerializerException("the bytes count exceeds the limit", ErrorNumber::TheBytesCountExceedsTheLimit);
+            throw BinarySerializerException("the bytes count exceeds the limit", ErrorNumber::TheBytesCountExceedsTheLimit);
         }
-        auto type = DataType::UBYTES;
+        auto type = BinaryDataType::UBYTES;
         write((char*)&type, sizeof(type)); //类型
         //存储长度
         write((char*)&len, sizeof(uint32_t));
@@ -318,14 +318,14 @@ namespace muse{
         MUSE_PREVENT_CROSSING_BOUNDARIES()
         auto defaultPosition = readPosition;
         //类型检测
-        if (byteStream[readPosition] != (char)DataType::STRING)
-            throw SerializerException("read type error", ErrorNumber::DataTypeError);
+        if (byteStream[readPosition] != (char)BinaryDataType::STRING)
+            throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
         //剩余空间检测
         readPosition++;
         auto leftSize =  byteStream.size() - readPosition;
         if (leftSize < sizeof(uint32_t)){
             readPosition = defaultPosition;
-            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+            throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //字符串长度,大小端处理
         auto stringLength = *((uint32_t *)(&byteStream[readPosition]));
@@ -338,14 +338,14 @@ namespace muse{
         //检测长度是否非法
         if (stringLength > MUSE_MAX_STRING_LENGTH){
             readPosition = defaultPosition;
-            throw SerializerException("illegal string length" , ErrorNumber::IllegalStringLength);
+            throw BinarySerializerException("illegal string length" , ErrorNumber::IllegalStringLength);
         }
         //检测剩余空间是否足够
         readPosition += sizeof(uint32_t);
         leftSize =  byteStream.size() - defaultPosition;
         if (leftSize < stringLength){
             readPosition = defaultPosition;
-            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+            throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //正确读取
         str.assign((char*)&byteStream[readPosition], stringLength);
@@ -358,14 +358,14 @@ namespace muse{
         MUSE_PREVENT_CROSSING_BOUNDARIES()
         auto defaultPosition = readPosition;
         //类型检测，可能会有越界错误
-        if (byteStream[readPosition] != (char)DataType::BYTES)
-            throw SerializerException("read type error", ErrorNumber::DataTypeError);
+        if (byteStream[readPosition] != (char)BinaryDataType::BYTES)
+            throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
         //读取长度信息
         readPosition++;
         auto leftSize =  byteStream.size() - readPosition;
         if (leftSize < sizeof(uint32_t)){
             readPosition = defaultPosition;
-            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+            throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //字符串长度 大小端处理
         auto stringLength = *((uint32_t *)(&byteStream[readPosition]));
@@ -378,17 +378,17 @@ namespace muse{
         //检测长度是否非法
         if (stringLength > MUSE_MAX_BYTE_COUNT){
             readPosition = defaultPosition;
-            throw SerializerException("illegal bytes count" , ErrorNumber::IllegalBytesCount);
+            throw BinarySerializerException("illegal bytes count" , ErrorNumber::IllegalBytesCount);
         }
         if (stringLength != len){
-            throw SerializerException("read illegal bytes count" , ErrorNumber::ReadIllegalBytesCount);
+            throw BinarySerializerException("read illegal bytes count" , ErrorNumber::ReadIllegalBytesCount);
         }
         //检测剩余空间是否足够
         readPosition += sizeof(uint32_t);
         leftSize =  byteStream.size() - defaultPosition;
         if (leftSize < stringLength){
             readPosition = defaultPosition;
-            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+            throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         std::memcpy(value,(char*)&byteStream[readPosition], stringLength);
         readPosition += static_cast<int>(stringLength);
@@ -400,14 +400,14 @@ namespace muse{
         MUSE_PREVENT_CROSSING_BOUNDARIES()
         auto defaultPosition = readPosition;
         //类型检测
-        if (byteStream[readPosition] != (char)DataType::UBYTES)
-            throw SerializerException("read type error", ErrorNumber::DataTypeError);
+        if (byteStream[readPosition] != (char)BinaryDataType::UBYTES)
+            throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
         //读取长度信息
         readPosition++;
         auto leftSize =  byteStream.size() - readPosition;
         if (leftSize < sizeof(uint32_t)){
             readPosition = defaultPosition;
-            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+            throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         //字符串长度 大小端处理
         auto stringLength = *((uint32_t *)(&byteStream[readPosition]));
@@ -420,17 +420,17 @@ namespace muse{
         //检测长度是否非法
         if (stringLength > MUSE_MAX_BYTE_COUNT){
             readPosition = defaultPosition;
-            throw SerializerException("illegal bytes count" , ErrorNumber::IllegalBytesCount);
+            throw BinarySerializerException("illegal bytes count" , ErrorNumber::IllegalBytesCount);
         }
         if (stringLength != len){
-            throw SerializerException("read illegal bytes count" , ErrorNumber::ReadIllegalBytesCount);
+            throw BinarySerializerException("read illegal bytes count" , ErrorNumber::ReadIllegalBytesCount);
         }
         //检测剩余空间是否足够
         readPosition += sizeof(uint32_t);
         leftSize =  byteStream.size() - defaultPosition;
         if (leftSize < stringLength){
             readPosition = defaultPosition;
-            throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+            throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
         }
         std::memcpy(value,(char*)&byteStream[readPosition], stringLength);
         readPosition += static_cast<int>(stringLength);
@@ -441,7 +441,7 @@ namespace muse{
         return readPosition;
     }
 
-    bool BinarySerializer::checkDataTypeRightForward(DataType dt){
+    bool BinarySerializer::checkDataTypeRightForward(BinaryDataType dt){
         //防止初次访问越界
         MUSE_PREVENT_CROSSING_BOUNDARIES()
         if (byteStream[readPosition] == (char)dt){
@@ -467,7 +467,7 @@ namespace muse{
 
     void BinarySerializer::saveToFile(const std::string& path) const{
         if (byteStream.empty()){
-            throw SerializerException("no data to store in file!", ErrorNumber::NoDataToStoreInFile);
+            throw BinarySerializerException("no data to store in file!", ErrorNumber::NoDataToStoreInFile);
         }
         std::ofstream saver(path,std::ios_base::binary | std::ios_base::trunc | std::ios_base::out );
         if (!saver.fail() && saver.is_open()){

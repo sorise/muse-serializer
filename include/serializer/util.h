@@ -30,11 +30,11 @@ namespace muse{
     #define MUSE_MAX_SET_COUNT 16777216
 
     /*
-     *  type: enum class DataType : char
+     *  type: enum class BinaryDataType : char
      *  des: 支持序列化的数据类型
      *  大小必须是一个字节
      */
-    enum class DataType : char
+    enum class BinaryDataType : char
     {
         BOOL = 0,   //bool
         INT16,      //short
@@ -88,7 +88,6 @@ namespace muse{
         TheSetSizeExceedsTheLimit,          /* Set 成员数量超过 16777216   */
         IllegalSetCount,                    /* HashMap数量非法 */
         NoDataToStoreInFile,                /* 没有数据可以存储到文件中 */
-
     };
 
     /* 获取当前主机采用的字节序 */
@@ -107,10 +106,10 @@ namespace muse{
     }
 
     /* 错误异常消息 */
-    class SerializerException: public std::logic_error{
+    class BinarySerializerException: public std::logic_error{
     public:
-        explicit SerializerException(const std::string &arg, ErrorNumber err);
-        ~SerializerException() override ;
+        explicit BinarySerializerException(const std::string &arg, ErrorNumber err);
+        ~BinarySerializerException() override ;
         ErrorNumber getErrorNumber(); //返回错误号
     private:
         ErrorNumber errorNumber;

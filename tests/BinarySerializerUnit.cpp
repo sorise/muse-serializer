@@ -193,7 +193,7 @@ TEST_CASE("binarySerializer - byte count exceed","[binarySerializer]"){
     bool isSuccess = true;
     try {
         serializer.input("", UINT32_MAX); //4
-    } catch (muse::SerializerException& ex) {
+    } catch (muse::BinarySerializerException& ex) {
         isSuccess = false;
     }
     REQUIRE_FALSE(isSuccess);

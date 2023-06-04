@@ -14,7 +14,7 @@
 #include <set>
 #include <fstream>
 #include <string>
-#include <sstream>
+
 
 static_assert(__cplusplus >= 201103L, "C++ version is not right" );
 
@@ -27,7 +27,7 @@ static_assert(__cplusplus >= 201103L, "C++ version is not right" );
 
 #define MUSE_PREVENT_BOUNDARY() \
     if (readPosition == byteStream.size()){ \
-        throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
+        throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
     }
 
 namespace muse{
@@ -74,7 +74,7 @@ namespace muse{
         void reset();                            //重新从开始读取
         Container_type::size_type byteCount() const;                //多少字节数量
         Position_Type getReadPosition() const;                      //获得当前指针所在位置
-        bool checkDataTypeRightForward(DataType type);              //检查类型是否正确，如果正确，移动 readPosition
+        bool checkDataTypeRightForward(BinaryDataType type);              //检查类型是否正确，如果正确，移动 readPosition
         BinarySerializer();                                         //默认构造函数
         BinarySerializer(const BinarySerializer& other) = delete;   //禁止复制
         BinarySerializer(BinarySerializer &&other) noexcept;        //支持移动操作
@@ -102,13 +102,13 @@ namespace muse{
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
         BinarySerializer& input(const std::vector<T>& value){
-            auto type = DataType::VECTOR;
+            auto type = BinaryDataType::VECTOR;
             //写入类型
             write((char*)&type, sizeof(type));
             //获得成员数量,不能超过某个限制
             auto elementCount = value.size();
             if (elementCount > MUSE_MAX_VECTOR_COUNT){
-                throw SerializerException("the vector count exceeds the limit", ErrorNumber::TheVectorCountExceedsTheLimit);
+                throw BinarySerializerException("the vector count exceeds the limit", ErrorNumber::TheVectorCountExceedsTheLimit);
             }
             //写入成员数量
             write((char*)&elementCount, sizeof(uint32_t));
@@ -124,12 +124,12 @@ namespace muse{
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
         BinarySerializer& input(const std::list<T> &value){
-            auto type = DataType::LIST;
+            auto type = BinaryDataType::LIST;
             //写入类型
             write((char*)&type, sizeof(type));
             auto elementCount = value.size();
             if (elementCount > MUSE_MAX_LIST_COUNT){
-                throw SerializerException("the list count exceeds the limit", ErrorNumber::TheListCountExceedsTheLimit);
+                throw BinarySerializerException("the list count exceeds the limit", ErrorNumber::TheListCountExceedsTheLimit);
             }
             //写入成员数量
             write((char*)&elementCount, sizeof(uint32_t));
@@ -148,12 +148,12 @@ namespace muse{
                 typename = typename std::enable_if_t<std::is_default_constructible_v<V>>
         >
         BinarySerializer& input(const std::map<K,V> &value){
-            auto type = DataType::MAP;
+            auto type = BinaryDataType::MAP;
             //写入类型
             write((char*)&type, sizeof(type));
             auto elementCount = value.size();
             if (elementCount > MUSE_MAX_MAP_COUNT){
-                throw SerializerException("the map key-value pairs count exceeds the limit", ErrorNumber::TheMapKVCountExceedsTheLimit);
+                throw BinarySerializerException("the map key-value pairs count exceeds the limit", ErrorNumber::TheMapKVCountExceedsTheLimit);
             }
             //写入成员数量
             write((char*)&elementCount, sizeof(uint32_t));
@@ -172,12 +172,12 @@ namespace muse{
                 typename = typename std::enable_if_t<std::is_default_constructible_v<V>>
         >
         BinarySerializer& input(const std::unordered_map<K,V> &value){
-            auto type = DataType::HASHMAP;
+            auto type = BinaryDataType::HASHMAP;
             //写入类型
             write((char*)&type, sizeof(type));
             auto elementCount = value.size();
             if (elementCount > MUSE_MAX_MAP_COUNT){
-                throw SerializerException("the hash map key-value pairs count exceeds the limit", ErrorNumber::TheHashMapKVCountExceedsTheLimit);
+                throw BinarySerializerException("the hash map key-value pairs count exceeds the limit", ErrorNumber::TheHashMapKVCountExceedsTheLimit);
             }
             //写入成员数量
             write((char*)&elementCount, sizeof(uint32_t));
@@ -192,12 +192,12 @@ namespace muse{
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
         BinarySerializer& input(const std::set<T> &value){
-            auto type = DataType::SET;
+            auto type = BinaryDataType::SET;
             //写入类型
             write((char*)&type, sizeof(type));
             auto elementCount = value.size();
             if (elementCount > MUSE_MAX_LIST_COUNT){
-                throw SerializerException("the set count exceeds the limit", ErrorNumber::TheSetSizeExceedsTheLimit);
+                throw BinarySerializerException("the set count exceeds the limit", ErrorNumber::TheSetSizeExceedsTheLimit);
             }
             //写入成员数量
             write((char*)&elementCount, sizeof(uint32_t));
@@ -213,13 +213,13 @@ namespace muse{
 
         template<typename... Args>
         BinarySerializer &input(const std::tuple<Args...>& tpl) {
-            auto type = DataType::TUPLE;
+            auto type = BinaryDataType::TUPLE;
             //写入类型
             write((char*)&type, sizeof(type));
             //获得长度
             uint16_t tupleSize = getTupleElementCount(tpl);
             if (tupleSize > MUSE_MAX_TUPLE_COUNT){
-                throw SerializerException("the tuple size exceeds the limit", ErrorNumber::TheTupleCountExceedsTheLimit);
+                throw BinarySerializerException("the tuple size exceeds the limit", ErrorNumber::TheTupleCountExceedsTheLimit);
             }
             //写入长度
             write((char*)&tupleSize, sizeof(uint16_t));
@@ -267,8 +267,8 @@ namespace muse{
             //防止越界
             MUSE_PREVENT_BOUNDARY()
             //类型检测
-            if (byteStream[readPosition] != (char)DataType::VECTOR)
-                throw SerializerException("read type error", ErrorNumber::DataTypeError);
+            if (byteStream[readPosition] != (char)BinaryDataType::VECTOR)
+                throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
 
             auto defaultPosition = readPosition;
             value.clear(); //先清除数据
@@ -278,7 +278,7 @@ namespace muse{
             auto leftSize =  byteStream.size() - readPosition;
             if (leftSize < sizeof(uint32_t)){
                 readPosition = defaultPosition;
-                throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+                throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
             }
             //读取字符串长度 大小端处理
             auto vectorSize = *((uint32_t *)(&byteStream[readPosition]));
@@ -291,7 +291,7 @@ namespace muse{
             //检测长度是否非法
             if (vectorSize > MUSE_MAX_VECTOR_COUNT){
                 readPosition = defaultPosition;
-                throw SerializerException("illegal vector count" , ErrorNumber::IllegalVectorCount);
+                throw BinarySerializerException("illegal vector count" , ErrorNumber::IllegalVectorCount);
             }
             //检测剩余空间是否足够
             readPosition += sizeof(uint32_t);
@@ -302,7 +302,7 @@ namespace muse{
                     output(v);
                     value.emplace_back(v);
                 }
-            }catch(SerializerException &serializerException) {
+            }catch(BinarySerializerException &serializerException) {
                 readPosition = defaultPosition;
                 throw serializerException;
             }catch (std::exception &ex) {
@@ -310,7 +310,7 @@ namespace muse{
                 throw ex;
             }catch (...){
                 readPosition = defaultPosition;
-                throw SerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
+                throw BinarySerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
             }
             return *this;
         }
@@ -320,8 +320,8 @@ namespace muse{
             //防止越界
             MUSE_PREVENT_BOUNDARY()
             //类型检测
-            if (byteStream[readPosition] != (char)DataType::LIST)
-                throw SerializerException("read type error", ErrorNumber::DataTypeError);
+            if (byteStream[readPosition] != (char)BinaryDataType::LIST)
+                throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
             auto defaultPosition = readPosition;
             value.clear(); //先清除数据
             //读取长度信息
@@ -330,7 +330,7 @@ namespace muse{
             auto leftSize =  byteStream.size() - readPosition;
             if (leftSize < sizeof(uint32_t)){
                 readPosition = defaultPosition;
-                throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+                throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
             }
             //读取字符串长度 大小端处理
             auto listSize = *((uint32_t *)(&byteStream[readPosition]));
@@ -343,7 +343,7 @@ namespace muse{
             //检测长度是否非法
             if (listSize > MUSE_MAX_LIST_COUNT){
                 readPosition = defaultPosition;
-                throw SerializerException("illegal list count" , ErrorNumber::IllegalListCount);
+                throw BinarySerializerException("illegal list count" , ErrorNumber::IllegalListCount);
             }
             readPosition += sizeof(uint32_t);
             try {
@@ -353,7 +353,7 @@ namespace muse{
                     output(v);
                     value.emplace_back(v);
                 }
-            }catch(SerializerException &serializerException) {
+            }catch(BinarySerializerException &serializerException) {
                 readPosition = defaultPosition;
                 throw serializerException;
             }catch (std::exception &ex) {
@@ -361,7 +361,7 @@ namespace muse{
                 throw ex;
             }catch (...){
                 readPosition = defaultPosition;
-                throw SerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
+                throw BinarySerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
             }
             return *this;
         }
@@ -371,8 +371,8 @@ namespace muse{
             //防止越界
             MUSE_PREVENT_BOUNDARY()
             //类型检测
-            if (byteStream[readPosition] != (char)DataType::SET)
-                throw SerializerException("read type error", ErrorNumber::DataTypeError);
+            if (byteStream[readPosition] != (char)BinaryDataType::SET)
+                throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
             auto defaultPosition = readPosition;
             value.clear();
             //读取长度信息
@@ -381,7 +381,7 @@ namespace muse{
             auto leftSize =  byteStream.size() - readPosition;
             if (leftSize < sizeof(uint32_t)){
                 readPosition = defaultPosition;
-                throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+                throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
             }
             //读取字符串长度 大小端处理
             auto setSize = *((uint32_t *)(&byteStream[readPosition]));
@@ -394,7 +394,7 @@ namespace muse{
             //检测长度是否非法
             if (setSize > MUSE_MAX_SET_COUNT){
                 readPosition = defaultPosition;
-                throw SerializerException("illegal set count" , ErrorNumber::IllegalSetCount);
+                throw BinarySerializerException("illegal set count" , ErrorNumber::IllegalSetCount);
             }
             readPosition += sizeof(uint32_t);
             try {
@@ -404,7 +404,7 @@ namespace muse{
                     output(v);
                     value.emplace(v);
                 }
-            }catch(SerializerException &serializerException) {
+            }catch(BinarySerializerException &serializerException) {
                 readPosition = defaultPosition;
                 throw serializerException;
             }catch (std::exception &ex) {
@@ -412,7 +412,7 @@ namespace muse{
                 throw ex;
             }catch (...){
                 readPosition = defaultPosition;
-                throw SerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
+                throw BinarySerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
             }
             return *this;
         }
@@ -425,8 +425,8 @@ namespace muse{
             //防止越界
             MUSE_PREVENT_BOUNDARY()
             //类型检测
-            if (byteStream[readPosition] != (char)DataType::MAP)
-                throw SerializerException("read type error", ErrorNumber::DataTypeError);
+            if (byteStream[readPosition] != (char)BinaryDataType::MAP)
+                throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
             auto defaultPosition = readPosition;
             readPosition++;
             value.clear();
@@ -434,7 +434,7 @@ namespace muse{
             auto leftSize =  byteStream.size() - readPosition;
             if (leftSize < sizeof(uint32_t)){
                 readPosition = defaultPosition;
-                throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+                throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
             }
             //读取字符串长度 大小端处理
             auto mapKVSize = *((uint32_t *)(&byteStream[readPosition]));
@@ -447,7 +447,7 @@ namespace muse{
             //检测长度是否非法
             if (mapKVSize > MUSE_MAX_MAP_COUNT){
                 readPosition = defaultPosition;
-                throw SerializerException("illegal map k-v pair count" , ErrorNumber::IllegalMapKVCount);
+                throw BinarySerializerException("illegal map k-v pair count" , ErrorNumber::IllegalMapKVCount);
             }
             readPosition += sizeof(uint32_t);
             try {
@@ -459,7 +459,7 @@ namespace muse{
                     output(v);
                     value[k] = v;
                 }
-            }catch(SerializerException &serializerException) {
+            }catch(BinarySerializerException &serializerException) {
                 readPosition = defaultPosition;
                 throw serializerException;
             }catch (std::exception &ex) {
@@ -467,7 +467,7 @@ namespace muse{
                 throw ex;
             }catch (...){
                 readPosition = defaultPosition;
-                throw SerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
+                throw BinarySerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
             }
             return *this;
         }
@@ -480,8 +480,8 @@ namespace muse{
             //防止越界
             MUSE_PREVENT_BOUNDARY()
             //类型检测
-            if (byteStream[readPosition] != (char)DataType::HASHMAP)
-                throw SerializerException("read type error", ErrorNumber::DataTypeError);
+            if (byteStream[readPosition] != (char)BinaryDataType::HASHMAP)
+                throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
             auto defaultPosition = readPosition;
             readPosition++;
             value.clear();
@@ -489,7 +489,7 @@ namespace muse{
             auto leftSize =  byteStream.size() - readPosition;
             if (leftSize < sizeof(uint32_t)){
                 readPosition = defaultPosition;
-                throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+                throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
             }
             //读取字符串长度 大小端处理
             auto mapKVSize = *((uint32_t *)(&byteStream[readPosition]));
@@ -502,7 +502,7 @@ namespace muse{
             //检测长度是否非法
             if (mapKVSize > MUSE_MAX_MAP_COUNT){
                 readPosition = defaultPosition;
-                throw SerializerException("illegal hash map k-v pair count" , ErrorNumber::IllegalHashMapKVCount);
+                throw BinarySerializerException("illegal hash map k-v pair count" , ErrorNumber::IllegalHashMapKVCount);
             }
             readPosition += sizeof(uint32_t);
             try {
@@ -514,7 +514,7 @@ namespace muse{
                     output(v);
                     value[k] = v;
                 }
-            }catch(SerializerException &serializerException) {
+            }catch(BinarySerializerException &serializerException) {
                 readPosition = defaultPosition;
                 throw serializerException;
             }catch (std::exception &ex) {
@@ -522,7 +522,7 @@ namespace muse{
                 throw ex;
             }catch (...){
                 readPosition = defaultPosition;
-                throw SerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
+                throw BinarySerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
             }
             return *this;
         }
@@ -540,15 +540,15 @@ namespace muse{
             //防止越界
             MUSE_PREVENT_BOUNDARY()
             //类型检测
-            if (byteStream[readPosition] != (char)DataType::TUPLE)
-                throw SerializerException("read type error", ErrorNumber::DataTypeError);
+            if (byteStream[readPosition] != (char)BinaryDataType::TUPLE)
+                throw BinarySerializerException("read type error", ErrorNumber::DataTypeError);
             auto defaultPosition = readPosition;
             readPosition++;
             //获取 tuple 元素个数
             auto leftSize =  byteStream.size() - readPosition;
             if (leftSize < sizeof(uint16_t)){
                 readPosition = defaultPosition;
-                throw SerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
+                throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory);
             }
             auto tupleSize = *((uint16_t *)(&byteStream[readPosition]));
             //处理大小端
@@ -561,17 +561,17 @@ namespace muse{
             //检测长度是否非法
             if (tupleSize > MUSE_MAX_TUPLE_COUNT){
                 readPosition = defaultPosition;
-                throw SerializerException("illegal tuple count" , ErrorNumber::IllegalTupleCount);
+                throw BinarySerializerException("illegal tuple count" , ErrorNumber::IllegalTupleCount);
             }
             constexpr size_t N = sizeof...(Args);
             if (tupleSize != N){
                 readPosition = defaultPosition;
-                throw SerializerException("tuple count not match" , ErrorNumber::IllegalParameterTupleCount);
+                throw BinarySerializerException("tuple count not match" , ErrorNumber::IllegalParameterTupleCount);
             }
             readPosition += sizeof(uint16_t);
             try {
                 TupleReader<N - 1>::read(tpl,*this);
-            }catch(SerializerException &serializerException) {
+            }catch(BinarySerializerException &serializerException) {
                 readPosition = defaultPosition;
                 throw serializerException;
             }catch (std::exception &ex) {
@@ -579,7 +579,7 @@ namespace muse{
                 throw ex;
             }catch (...){
                 readPosition = defaultPosition;
-                throw SerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
+                throw BinarySerializerException("not know error", ErrorNumber::ErrorReadingSubElements);
             }
             return *this;
         }
@@ -606,7 +606,7 @@ namespace muse{
 
 #define MUSE_IBinarySerializable(...)   \
     void serialize(muse::BinarySerializer &serializer) const override{     \
-        auto type = muse::DataType::MUSECLASS;                             \
+        auto type = muse::BinaryDataType::MUSECLASS;                             \
         serializer.write((char*)&type, sizeof(type));                \
         serializer.inputArgs(__VA_ARGS__);                           \
     };                                                               \
@@ -614,10 +614,10 @@ namespace muse{
     void deserialize(muse::BinarySerializer &serializer)  override {    \
         auto readPosition = serializer.getReadPosition();               \
         if (readPosition == serializer.byteCount()){                    \
-            throw muse::SerializerException("remaining memory is not enough ", muse::ErrorNumber::InsufficientRemainingMemory); \
+            throw muse::BinarySerializerException("remaining memory is not enough ", muse::ErrorNumber::InsufficientRemainingMemory); \
         }                                                                                                                       \
-        auto result = serializer.checkDataTypeRightForward(muse::DataType::MUSECLASS);                                          \
-        if (!result) throw muse::SerializerException("read type error", muse::ErrorNumber::DataTypeError);                      \
+        auto result = serializer.checkDataTypeRightForward(muse::BinaryDataType::MUSECLASS);                                          \
+        if (!result) throw muse::BinarySerializerException("read type error", muse::ErrorNumber::DataTypeError);                      \
         serializer.outputArgs(__VA_ARGS__);                                                                                     \
     }
 }
