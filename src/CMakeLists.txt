@@ -1,1 +1,3 @@
-add_library(serializer SHARED ./serializer/binarySerializer.cpp ./serializer/util.cpp)
+aux_source_directory(./serializer cpp_list)
+
+add_library(serializer SHARED ${cpp_list})

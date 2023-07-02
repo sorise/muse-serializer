@@ -7,7 +7,7 @@
 #include "binarySerializer.h"
 
 //接口类
-namespace muse {
+namespace muse::serializer{
     class BinarySerializer;
     //用户自定义类型必须具有
     class IBinarySerializable{

@@ -11,7 +11,7 @@
 #include <exception>
 #include <tuple>
 
-namespace muse{
+namespace muse::serializer{
     //初始化容量大小
     #define MUSE_DEFAULT_CAPACITY 32
     //字符串的最大长度, 1MB 等于 1048576 字节， 0.5M 524288

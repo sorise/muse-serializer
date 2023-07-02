@@ -7,13 +7,10 @@
 #include <arpa/inet.h>
 #include <tuple>
 
-using namespace muse;
-
-
+using namespace muse::serializer;
 
 int main() {
-    muse::BinarySerializer serializer;
-
+    BinarySerializer serializer;
     bool sex = false;
     uint16_t age = 25;
     std::list<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
@@ -21,10 +18,10 @@ int main() {
     //serializer.inputArgs(sex, age, names);
 
     bool outSex = true;
+
     serializer.input(outSex);
 
     std::cout << std::boolalpha << outSex << std::endl;
-
     return 0;
 }
 

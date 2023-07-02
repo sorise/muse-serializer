@@ -14,7 +14,8 @@
 #include <set>
 #include <fstream>
 #include <string>
-
+#include <sstream>
+#include <cstdint>
 
 static_assert(__cplusplus >= 201103L, "C++ version is not right" );
 
@@ -30,7 +31,7 @@ static_assert(__cplusplus >= 201103L, "C++ version is not right" );
         throw BinarySerializerException("remaining memory is not enough ", ErrorNumber::InsufficientRemainingMemory); \
     }
 
-namespace muse{
+namespace muse::serializer{
     class IBinarySerializable; //define
 
     class BinarySerializer final{
@@ -98,7 +99,7 @@ namespace muse{
         BinarySerializer& input(const std::string &);
         BinarySerializer& input(const char*, unsigned int);
         BinarySerializer& input(const unsigned char*, unsigned int);
-        BinarySerializer &input(const muse::IBinarySerializable &serializable);
+        BinarySerializer &input(const muse::serializer::IBinarySerializable &serializable);
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
         BinarySerializer& input(const std::vector<T>& value){
@@ -583,8 +584,7 @@ namespace muse{
             }
             return *this;
         }
-
-        BinarySerializer &output(muse::IBinarySerializable &serializable);
+        BinarySerializer &output(muse::serializer::IBinarySerializable &serializable);
     };
 
     template<>
@@ -605,19 +605,19 @@ namespace muse{
     };
 
 #define MUSE_IBinarySerializable(...)   \
-    void serialize(muse::BinarySerializer &serializer) const override{     \
-        auto type = muse::BinaryDataType::MUSECLASS;                             \
+    void serialize(muse::serializer::BinarySerializer &serializer) const override{     \
+        auto type = muse::serializer::BinaryDataType::MUSECLASS;                             \
         serializer.write((char*)&type, sizeof(type));                \
         serializer.inputArgs(__VA_ARGS__);                           \
     };                                                               \
                                                                      \
-    void deserialize(muse::BinarySerializer &serializer)  override {    \
+    void deserialize(muse::serializer::BinarySerializer &serializer)  override {    \
         auto readPosition = serializer.getReadPosition();               \
         if (readPosition == serializer.byteCount()){                    \
-            throw muse::BinarySerializerException("remaining memory is not enough ", muse::ErrorNumber::InsufficientRemainingMemory); \
+            throw muse::serializer::BinarySerializerException("remaining memory is not enough ", muse::serializer::ErrorNumber::InsufficientRemainingMemory); \
         }                                                                                                                       \
-        auto result = serializer.checkDataTypeRightForward(muse::BinaryDataType::MUSECLASS);                                          \
-        if (!result) throw muse::BinarySerializerException("read type error", muse::ErrorNumber::DataTypeError);                      \
+        auto result = serializer.checkDataTypeRightForward(muse::serializer::BinaryDataType::MUSECLASS);                                          \
+        if (!result) throw muse::serializer::BinarySerializerException("read type error", muse::serializer::ErrorNumber::DataTypeError);                      \
         serializer.outputArgs(__VA_ARGS__);                                                                                     \
     }
 }

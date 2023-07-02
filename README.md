@@ -1,16 +1,18 @@
 ## [muse-serializer](#)
-**介绍**： 一个实现简单的 C++ 序列化库，支持丰富的数据类型：整数、浮点数、布尔值、字符、字符串、二进制流、stl的部分容器、用户自定义类型，支持 C++ 11/14/17， 字节编码顺序为小端序。
+**介绍**： 一个实现简单的 C++ 序列化库，支持丰富的数据类型：整数、浮点数、布尔值、字符、字符串、二进制流、元组、stl的部分容器、用户自定义类型，支持 C++ 11/14/17， 字节编码顺序为小端序。
 
 ----
 
+**使用例子**：
 ```cpp
 #include "serializer/binarySerializer.h"
 
+using namespace muse::serializer;
+
 //创建一个二进制序列化器
-muse::BinarySerializer serializer;
+BinarySerializer serializer;
 
 int a = 10;
-
 //单个序列化
 serializer.input(a);
 
@@ -23,7 +25,7 @@ serializer.inputArgs(names, scores);
 serializer.saveToFile("./serializer.dat");
 
 //从文件中加载
-muse::BinarySerializer loadSerializer;
+BinarySerializer loadSerializer;
 
 loadSerializer.loadFromFile("./serializer.dat");
 
@@ -82,7 +84,7 @@ input/output 是最基本的API（It is the most basic API）：
 ```cpp
 #include "serializer/binarySerializer.h"
     
-muse::BinarySerializer serializer;
+muse::serializer::BinarySerializer serializer;
 //将元组序列化
 std::tuple<std::string ,int ,float> tplOne { "remix", 25, 173.5};
 serializer.input(tplOne);
@@ -96,7 +98,7 @@ serializer.output(tplOneOut);
 支持可变参数，可以使得代码更加简洁(Support for variable parameters can make the code more concise:):
 
 ```cpp
-muse::BinarySerializer serializer;
+muse::serializer::BinarySerializer serializer;
 
 bool sex = false;
 uint16_t age = 25;
@@ -133,7 +135,7 @@ public:
     ~user() = default;
 };
 
-muse::BinarySerializer serializer;
+muse::serializer::BinarySerializer serializer;
 user me("remix", 25);
 
 serializer.inputArgs(me);
@@ -148,7 +150,7 @@ std::cout << you.getName() == me.getName() << std::endl; //true
 #### [2.4 二进制流信息](#)
 获得序列化后的字节流指针：
 ```cpp
-muse::BinarySerializer serializer;
+muse::serializer::BinarySerializer serializer;
 /*
  * 其他操作
 */
@@ -160,7 +162,7 @@ const char* streamPtr = serializer.getBinaryStream(); //获取数据流的指针
 #### [2.5 将数据存储到文件中](#)
 调用方法 **saveToFile** 将数据流存储到文件中， 如果没有任何数据会抛出异常。
 ```cpp
-muse::BinarySerializer serializer;
+muse::serializer::BinarySerializer serializer;
 /*
  * 其他操作
 */
@@ -170,7 +172,7 @@ serializer.saveToFile("./serializer.dat");
 #### [2.6 从文件中加载数据](#)
 从文件中直接加载数据，可能需要优化！
 ```cpp
-muse::BinarySerializer serializer;
+muse::serializer::BinarySerializer serializer;
 /*
  * 其他操作
 */

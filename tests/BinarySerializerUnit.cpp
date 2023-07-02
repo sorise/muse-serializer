@@ -5,7 +5,7 @@
 #include "serializer/binarySerializer.h"
 
 TEST_CASE("binarySerializer - bool", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     bool valOne = true;
     bool valTwo = false;
 
@@ -21,7 +21,7 @@ TEST_CASE("binarySerializer - bool", "[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - int16", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     int16_t valOne = 45;
     int16_t valTwo = 22;
 
@@ -38,7 +38,7 @@ TEST_CASE("binarySerializer - int16", "[binarySerializer]"){
 
 
 TEST_CASE("binarySerializer - int32", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     int32_t valOne = 32;
     int32_t valTwo = 64;
 
@@ -54,7 +54,7 @@ TEST_CASE("binarySerializer - int32", "[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - int64", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     int64_t valOne = 48465464;
     int64_t valTwo = 48465442;
 
@@ -73,7 +73,7 @@ TEST_CASE("binarySerializer - int64", "[binarySerializer]"){
 
 
 TEST_CASE("binarySerializer - uint32", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     u_int32_t  valOne = 322;
     u_int32_t valTwo = 614;
 
@@ -90,7 +90,7 @@ TEST_CASE("binarySerializer - uint32", "[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - uint64", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     u_int64_t valOne = 845470;
     u_int64_t valTwo = 740000;
 
@@ -107,7 +107,7 @@ TEST_CASE("binarySerializer - uint64", "[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - char", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     char valOne = 32;
     char valTwo = 64;
 
@@ -126,7 +126,7 @@ TEST_CASE("binarySerializer - string","[binarySerializer]"){
     std::string names { "test file" };
     auto pastLength = names.length();
 
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     serializer.input(names);
 
     std::string outName;
@@ -140,7 +140,7 @@ TEST_CASE("binarySerializer - string","[binarySerializer]"){
 
 TEST_CASE("binarySerializer - byteCount","[binarySerializer]"){
     uint64_t value = 11845;
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     serializer.input(value);
     auto size = serializer.byteCount();
 
@@ -154,7 +154,7 @@ TEST_CASE("binarySerializer - byteCount","[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - const char*","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     char bytes[7] = {0x12,0x11,0x48,0x12,0x19,0x45, -0x41};
     serializer.input(bytes, 7);
 
@@ -171,7 +171,7 @@ TEST_CASE("binarySerializer - const char*","[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - const unsigned char*","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     unsigned char bytes[7] = {0x12,0x11,0x98,0x12,0x19,0x45, 0xA1};
     serializer.input(bytes, 7);
 
@@ -189,11 +189,11 @@ TEST_CASE("binarySerializer - const unsigned char*","[binarySerializer]"){
 
 
 TEST_CASE("binarySerializer - byte count exceed","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     bool isSuccess = true;
     try {
         serializer.input("", UINT32_MAX); //4
-    } catch (muse::BinarySerializerException& ex) {
+    } catch (muse::serializer::BinarySerializerException& ex) {
         isSuccess = false;
     }
     REQUIRE_FALSE(isSuccess);
@@ -201,7 +201,7 @@ TEST_CASE("binarySerializer - byte count exceed","[binarySerializer]"){
 
 
 TEST_CASE("binarySerializer - inputArgs", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
 
     int32_t age = 65;
     bool sex = false;
@@ -223,7 +223,7 @@ TEST_CASE("binarySerializer - inputArgs", "[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - vector<T>","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
 
     std::vector<std::string> names {"remix", "coco", "muse", "uix", "lin"};
     std::vector<float> values {57.12,95.15,85.5,99.5};
@@ -245,7 +245,7 @@ TEST_CASE("binarySerializer - vector<T>","[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - list<T>","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     std::list<std::string> names {"remix", "coco", "muse", "uix", "lin"};
     std::list<float> values {57.12,95.15,85.5,99.5};
 
@@ -271,7 +271,7 @@ TEST_CASE("binarySerializer - list<T>","[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - map<K,v>","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     std::map<std::string , double> kvs;
     kvs["sd"] = 75.15;
     kvs["sd23"] = 175.15;
@@ -287,7 +287,7 @@ TEST_CASE("binarySerializer - map<K,v>","[binarySerializer]"){
 
 
 TEST_CASE("binarySerializer - component","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     bool sex = false;
     uint16_t age = 25;
     std::string name {"remix"};
@@ -310,7 +310,7 @@ TEST_CASE("binarySerializer - component","[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - tuple<...>","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     //将元组序列化
     std::tuple<std::string ,int ,float> tplOne { "remix", 25, 173.5};
     serializer.input(tplOne);
@@ -324,7 +324,7 @@ TEST_CASE("binarySerializer - tuple<...>","[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - unordered_map<K,V>","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
 
     std::unordered_map<std::string, uint32_t> dic;
     dic["remix"] = 45;
@@ -339,7 +339,7 @@ TEST_CASE("binarySerializer - unordered_map<K,V>","[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - set<T>","[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
 
     std::set<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
 
@@ -354,7 +354,7 @@ TEST_CASE("binarySerializer - set<T>","[binarySerializer]"){
 
 
 TEST_CASE("binarySerializer - muse class", "[binarySerializer]"){
-    class user: public muse::IBinarySerializable{
+    class user: public muse::serializer::IBinarySerializable{
     private:
         std::string _name;
         uint16_t _age;
@@ -369,7 +369,7 @@ TEST_CASE("binarySerializer - muse class", "[binarySerializer]"){
         ~user() = default;
     };
 
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
     user me("remix", 25);
 
     serializer.inputArgs(me);
@@ -383,7 +383,7 @@ TEST_CASE("binarySerializer - muse class", "[binarySerializer]"){
 }
 
 TEST_CASE("binarySerializer - save - load", "[binarySerializer]"){
-    muse::BinarySerializer serializer;
+    muse::serializer::BinarySerializer serializer;
 
     int a = 10;
     serializer.input(a);
@@ -400,7 +400,7 @@ TEST_CASE("binarySerializer - save - load", "[binarySerializer]"){
     serializer.saveToFile("./serializer.dat");
 
     //从文件中加载
-    muse::BinarySerializer loadSerializer;
+    muse::serializer::BinarySerializer loadSerializer;
     loadSerializer.loadFromFile("./serializer.dat");
 
     int aLoad;

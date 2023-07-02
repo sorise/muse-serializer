@@ -1,9 +1,10 @@
 //
 // Created by remix on 23-5-26.
 //
+#include <cstdint>
 #include "serializer/binarySerializer.h"
 
-namespace muse{
+namespace muse::serializer{
     class IBinarySerializable;
 /* 进行反序列合法性检测 */
 #define MUSE_CHECK_LEGITIMACY(TYPENAME, realName)                            \
