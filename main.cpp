@@ -14,14 +14,18 @@ int main() {
     bool sex = false;
     uint16_t age = 25;
     std::list<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
-    serializer.input(sex).input(age).input(names);
-    //serializer.inputArgs(sex, age, names);
+    serializer.inputArgs(sex, age, names);
 
-    bool outSex = true;
+    bool outSex = serializer.output<bool>();
+    uint16_t outAge = serializer.output<uint16_t>();
+    std::list<std::string> outNames = serializer.output<std::list<std::string>>();
 
-    serializer.input(outSex);
+    for (auto &it: outNames) {
+        std::cout << " - " <<it << std::endl;
+    }
 
-    std::cout << std::boolalpha << outSex << std::endl;
+    std::cout << "sex:" << outSex << std::endl;
+    std::cout << "age:" << outAge << std::endl;
     return 0;
 }
 

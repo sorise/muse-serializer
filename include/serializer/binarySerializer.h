@@ -262,6 +262,13 @@ namespace muse::serializer{
         BinarySerializer& output(char * , unsigned int ); /* 可能存在有复制消耗*/
         BinarySerializer& output(unsigned char * , unsigned int ); /* 可能存在有复制消耗*/
 
+        template<class T>
+        T output(){
+            T t;
+            this->output(t);
+            return t;
+        }
+
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
         BinarySerializer& output(std::vector<T>& value)
         {
@@ -585,6 +592,7 @@ namespace muse::serializer{
             return *this;
         }
         BinarySerializer &output(muse::serializer::IBinarySerializable &serializable);
+
     };
 
     template<>
