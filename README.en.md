@@ -1,5 +1,5 @@
 ## [muse-serializer](#)
-**介绍**： 一个实现简单的 C++ 序列化库，支持丰富的数据类型，例如：整数、浮点数、布尔值、字符、字符串、二进制流、td::tuple、 std::list
+**Introduction**: A simple C++serialization library that supports rich data types, such as integer, Floating-point arithmetic, boolean, character, string, binary stream, td:: tuple, std:: list
 
 ----
 
