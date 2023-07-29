@@ -236,6 +236,10 @@ namespace muse::serializer{
         return *this;
     }
 
+    BinarySerializer& BinarySerializer::input(const std::tuple<> & tpl){
+        return *this;
+    }
+
     BinarySerializer& BinarySerializer::output(bool & value) {
         MUSE_CHECK_LEGITIMACY(BOOL,bool)
         value = (bool)byteStream[++readPosition];
@@ -435,6 +439,10 @@ namespace muse::serializer{
         }
         std::memcpy(value,(char*)&byteStream[readPosition], stringLength);
         readPosition += static_cast<int>(stringLength);
+        return *this;
+    }
+
+    BinarySerializer& BinarySerializer::output(std::tuple<> & tpl){
         return *this;
     }
 

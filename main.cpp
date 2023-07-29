@@ -11,6 +11,10 @@ using namespace muse::serializer;
 
 int main() {
     BinarySerializer serializer;
+
+    std::tuple<> name;
+    serializer.output(name);
+
     bool sex = false;
     uint16_t age = 25;
     std::list<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
