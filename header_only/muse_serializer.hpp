@@ -215,7 +215,8 @@ namespace muse::serializer{
         BinarySerializer& input(const std::string &);
         BinarySerializer& input(const char*, unsigned int);
         BinarySerializer& input(const unsigned char*, unsigned int);
-        BinarySerializer &input(const muse::serializer::IBinarySerializable &serializable);
+        BinarySerializer& input(const muse::serializer::IBinarySerializable &serializable);
+        BinarySerializer& input(const std::tuple<> & tpl);
 
         template<typename T, typename = typename std::enable_if_t<std::is_default_constructible_v<T>>>
         BinarySerializer& input(const std::vector<T>& value){
@@ -377,6 +378,7 @@ namespace muse::serializer{
         BinarySerializer& output(std::string &);
         BinarySerializer& output(char * , unsigned int ); /* 可能存在有复制消耗*/
         BinarySerializer& output(unsigned char * , unsigned int ); /* 可能存在有复制消耗*/
+        BinarySerializer& output(std::tuple<> & tpl);
 
         template<class T>
         T output(){
@@ -932,6 +934,10 @@ namespace muse::serializer{
         return *this;
     }
 
+    BinarySerializer& BinarySerializer::input(const std::tuple<> & tpl){
+        return *this;
+    }
+
     BinarySerializer &BinarySerializer::input(const std::string & value) {
         uint32_t len = value.length();              //存储字符串长度
         //字符串长度不能超过  MUSE_MAX_STRING_LENGTH 规定
@@ -1072,6 +1078,10 @@ namespace muse::serializer{
         value = *((double *)(&byteStream[++readPosition]));
         //如果主机是大端序 将其转换为大端序列
         MUSE_CONVERT_TO_BIG_ENDIAN(double)
+        return *this;
+    }
+
+    BinarySerializer& BinarySerializer::output(std::tuple<> & tpl){
         return *this;
     }
 
