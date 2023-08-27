@@ -3,6 +3,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch2/catch.hpp"
 #include "serializer/binarySerializer.h"
+#include "serializer/binaryDeserializeView.hpp"
 
 TEST_CASE("binarySerializer - bool", "[binarySerializer]"){
     muse::serializer::BinarySerializer serializer;
@@ -412,3 +413,26 @@ TEST_CASE("binarySerializer - save - load", "[binarySerializer]"){
     REQUIRE( aLoad == 10 );
     REQUIRE( scoresLoad[0] == scores[0]);
 }
+
+
+TEST_CASE("BinaryDeserializeView", "basic"){
+    muse::serializer::BinarySerializer serializer;
+
+    std::tuple<> name;
+    serializer.output(name);
+
+    bool sex = false;
+    uint16_t age = 25;
+    std::list<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
+    serializer.inputArgs(sex, age, names);
+
+    muse::serializer::BinaryDeserializeView view(serializer.getBinaryStream(), serializer.byteCount());
+
+    bool outSex = view.output<bool>();
+    uint16_t outAge = view.output<uint16_t>();
+    std::list<std::string> outNames = view.output<std::list<std::string>>();
+
+    REQUIRE( outSex == sex  );
+    REQUIRE( outAge == age  );
+}
+

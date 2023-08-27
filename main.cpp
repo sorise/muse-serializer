@@ -9,9 +9,6 @@
 
 using namespace muse::serializer;
 
-
-
-
 int main() {
     BinarySerializer serializer;
 
@@ -23,9 +20,11 @@ int main() {
     std::list<std::string> names{"remix", "muse", "coco" , "tome", "alice" };
     serializer.inputArgs(sex, age, names);
 
-    bool outSex = serializer.output<bool>();
-    uint16_t outAge = serializer.output<uint16_t>();
-    std::list<std::string> outNames = serializer.output<std::list<std::string>>();
+    BinaryDeserializeView view(serializer.getBinaryStream(), serializer.byteCount());
+
+    bool outSex = view.output<bool>();
+    uint16_t outAge = view.output<uint16_t>();
+    std::list<std::string> outNames = view.output<std::list<std::string>>();
 
     for (auto &it: outNames) {
         std::cout << " - " <<it << std::endl;
