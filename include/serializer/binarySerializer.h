@@ -37,6 +37,8 @@ namespace muse::serializer{
     class BinarySerializer final{
     public:
         using Position_Type = long;
+        using Element_Length = uint32_t ;
+        using Tuple_Element_Length = uint16_t ;
     private:
         template<unsigned int N>
         struct TupleWriter {
@@ -67,6 +69,16 @@ namespace muse::serializer{
         void expansion(size_t len);
         /* 读取 */
         bool read(char* data, const unsigned int& len) noexcept ;
+
+        template<typename Tuple, std::size_t... Index>
+        void  input_tuple_helper(Tuple&& t, std::index_sequence<Index...>){
+            inputArgs(std::get<Index>(std::forward<Tuple>(t))...);
+        }
+
+        template<typename Tuple, std::size_t... Index>
+        void  output_tuple_helper(Tuple&& t, std::index_sequence<Index...>){
+            outputArgs(std::get<Index>(std::forward<Tuple>(t))...);
+        }
     public:
         /* 最基础的写入方法 */
         BinarySerializer& write(const char* data, const unsigned int& len);
@@ -230,8 +242,7 @@ namespace muse::serializer{
                 auto first = last - sizeof(uint16_t);
                 std::reverse(first, last);
             }
-            constexpr size_t N = sizeof...(Args);
-            TupleWriter<N - 1>::write(tpl,*this);
+            input_tuple_helper(tpl, std::make_index_sequence<sizeof...(Args)>());
             return *this;
         }
 
@@ -580,7 +591,8 @@ namespace muse::serializer{
             }
             readPosition += sizeof(uint16_t);
             try {
-                TupleReader<N - 1>::read(tpl,*this);
+                output_tuple_helper(tpl, std::make_index_sequence<N>());
+                //TupleReader<N - 1>::read(tpl,*this);
             }catch(BinarySerializerException &serializerException) {
                 readPosition = defaultPosition;
                 throw serializerException;
