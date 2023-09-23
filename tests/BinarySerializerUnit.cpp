@@ -245,6 +245,21 @@ TEST_CASE("binarySerializer - vector<T>","[binarySerializer]"){
     REQUIRE( serializer.byteCount() == 49 + 25);
 }
 
+
+TEST_CASE("binarySerializer - array<T, Len>","[binarySerializer]"){
+    muse::serializer::BinarySerializer serializer;
+
+    std::array<int , 10>  nums {0,1,2,3,4,5,6,7,8,9};
+
+    serializer.input(nums);
+    std::array<int , 10> values {0};
+    serializer.output(values);
+    for (int i = 0; i < 10; ++i) {
+        REQUIRE(nums[i] == values[i] );
+    }
+}
+
+
 TEST_CASE("binarySerializer - list<T>","[binarySerializer]"){
     muse::serializer::BinarySerializer serializer;
     std::list<std::string> names {"remix", "coco", "muse", "uix", "lin"};
