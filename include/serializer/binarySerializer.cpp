@@ -115,6 +115,13 @@ namespace muse::serializer{
         return *this;
     }
 
+    BinarySerializer &BinarySerializer::input(const unsigned char & value) {
+        auto type = BinaryDataType::UINT8;
+        write((char*)&type, sizeof(type)); //类型
+        write((char*)&value, sizeof(unsigned char)); //值
+        return *this;
+    }
+
     BinarySerializer &BinarySerializer::input(const int16_t & value) {
         auto type = BinaryDataType::INT16;
         auto dataTypeSize = sizeof(int16_t);
@@ -250,6 +257,13 @@ namespace muse::serializer{
     BinarySerializer& BinarySerializer::output(char & value) {
         MUSE_CHECK_LEGITIMACY(CHAR,char)
         value = (char)byteStream[++readPosition];
+        ++readPosition;
+        return *this;
+    }
+
+    BinarySerializer& BinarySerializer::output(unsigned char & value) {
+        MUSE_CHECK_LEGITIMACY(UINT8,unsigned char)
+        value = (unsigned char)byteStream[++readPosition];
         ++readPosition;
         return *this;
     }

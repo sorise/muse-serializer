@@ -66,6 +66,7 @@ namespace muse::serializer{
         //反序列化
         BinaryDeserializeView& output(bool &);
         BinaryDeserializeView& output(char &);
+        BinaryDeserializeView& output(unsigned char &);
         BinaryDeserializeView& output(int16_t &);
         BinaryDeserializeView& output(int32_t &);
         BinaryDeserializeView& output(int64_t &);

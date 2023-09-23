@@ -59,6 +59,7 @@ namespace muse::serializer{
         SET,        //集合 - Set
         MUSECLASS,  //用户自定义类型
         ARRAY,      //array<_tp, _nm> 类型
+        UINT8,      //unsigned char
     };
 
     enum class ByteSequence: short

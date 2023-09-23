@@ -101,6 +101,7 @@ namespace muse::serializer{
 
         BinarySerializer& input(const bool&);
         BinarySerializer& input(const char &);
+        BinarySerializer& input(const unsigned char &);
         BinarySerializer& input(const int16_t &);
         BinarySerializer& input(const int32_t &);
         BinarySerializer& input(const int64_t &);
@@ -284,6 +285,7 @@ namespace muse::serializer{
         //反序列化
         BinarySerializer& output(bool &);
         BinarySerializer& output(char &);
+        BinarySerializer& output(unsigned char &);
         BinarySerializer& output(int16_t &);
         BinarySerializer& output(int32_t &);
         BinarySerializer& output(int64_t &);

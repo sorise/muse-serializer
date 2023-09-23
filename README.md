@@ -54,6 +54,7 @@ std::cout << scoresLoad[0] << std::endl; //84.01
 | float                     | 1             | `float`                           |
 | double                    | 1             | `double`                          |
 | char                      | 1             | `char`                            |
+| unsigned char             | 1             | `unsigned char`                   |
 | std::string               | 1+4(标识长度) = 5 | `std::string`                     |
 | char*                     | 1+4 = 5       | 纯粹的字节流                            |
 | unsigned char*            | 1+4 = 5       | 纯粹的无符号字节流                         |
