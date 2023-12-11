@@ -289,9 +289,9 @@ namespace muse::serializer{
         BinarySerializer& output(int16_t &);
         BinarySerializer& output(int32_t &);
         BinarySerializer& output(int64_t &);
-        BinarySerializer& output(u_int16_t &);
-        BinarySerializer& output(u_int32_t &);
-        BinarySerializer& output(u_int64_t &);
+        BinarySerializer& output(uint16_t &);
+        BinarySerializer& output(uint32_t &);
+        BinarySerializer& output(uint64_t &);
         BinarySerializer& output(float &);
         BinarySerializer& output(double &);
         BinarySerializer& output(std::string &);
