@@ -44,7 +44,7 @@ namespace muse::serializer{
         byteStream = other.byteStream;
         readPosition = other.readPosition;
         byteSequence = other.byteSequence;
-
+        byteStreamSize = other.byteStreamSize;
         other.byteStream = nullptr;
         other.readPosition = 0;
     }
