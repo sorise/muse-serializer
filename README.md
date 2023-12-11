@@ -2,6 +2,9 @@
 **介绍**： 一个实现简单的 C++ 序列化库，支持丰富的数据类型：整数、浮点数、布尔值、字符、字符串、二进制流、元组、stl的部分容器、用户自定义类型，支持 C++ 11/14/17， 字节编码顺序为小端序。
 
 ----
+### 提供的接口类型
+* muse::serializer::BinarySerializer  序列化和反序列化器
+* muse::serializer::BinaryDeserializeView 仅仅支持反序列化，用户可以使用reset_bytestream方法自己指定字节流，用于避免复制拷贝。
 
 **使用例子**：
 ```cpp
@@ -196,3 +199,18 @@ serializer.loadFromFile("./serializer.dat");
 | unordered_map\<K,V\> | 元素个数最多 16777216, **K,V** 需要具有默认构造函数           | MUSE_MAX_LIST_COUNT    |
 | 用户自定义类型              | 需要继承 纯虚类 **IBinarySerializable** ，使用宏函数来实现接口。 | MUSE_IBinarySerializable(...)                     |
 
+### [4. BinaryDeserializeView](#)
+仅仅用于反序列化。
+```cpp
+//存放读取的内容
+std::string state_data_out;
+//levelDB 查找 state 是否存在
+status = chain_ptr->Get(leveldb::ReadOptions(), application_state::STORE_STATE_KEY, &state_data_out);
+muse::serializer::BinaryDeserializeView viewer;
+//指定字节流和长度
+viewer.reset_bytestream(state_data_out.c_str(), state_data_out.size());
+viewer.output(this->state);
+std::cout << "block chain current height: " <<this->state.current_height << std::endl;
+std::cout << "top block hash: " << this->state.top_block_hash.get_hex() << std::endl;
+std::cout << "genesis block hash: " << this->state.initial_block_hash.get_hex() << std::endl;
+```
