@@ -200,16 +200,23 @@ serializer.loadFromFile("./serializer.dat");
 | 用户自定义类型              | 需要继承 纯虚类 **IBinarySerializable** ，使用宏函数来实现接口。 | MUSE_IBinarySerializable(...)                     |
 
 ### [4. BinaryDeserializeView](#)
-仅仅用于反序列化。
+仅仅用于反序列化，避免内存拷贝开销。
 ```cpp
-//存放读取的内容
+//从levelDB中读取二进制数据，存放读取的内容
 std::string state_data_out;
 //levelDB 查找 state 是否存在
-status = chain_ptr->Get(leveldb::ReadOptions(), application_state::STORE_STATE_KEY, &state_data_out);
+status = chain_ptr->Get(
+        leveldb::ReadOptions(), 
+        application_state::STORE_STATE_KEY, 
+        &state_data_out);
+
 muse::serializer::BinaryDeserializeView viewer;
+
 //指定字节流和长度
 viewer.reset_bytestream(state_data_out.c_str(), state_data_out.size());
+
 viewer.output(this->state);
+
 std::cout << "block chain current height: " <<this->state.current_height << std::endl;
 std::cout << "top block hash: " << this->state.top_block_hash.get_hex() << std::endl;
 std::cout << "genesis block hash: " << this->state.initial_block_hash.get_hex() << std::endl;
